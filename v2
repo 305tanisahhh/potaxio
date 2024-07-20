@@ -5,15 +5,6 @@ local VIM = game:GetService("VirtualInputManager")
 local UserInputService = game:GetService("UserInputService")
 local StarterGui = game:GetService("StarterGui")
 
-if game.PlaceId ~= 12062942034 then
-	StarterGui:SetCore("SendNotification",{
-		Title = "Potaxio Assistant",
-		Text = "This script only works in Heroes: Online World",
-		Icon = "http://www.roblox.com/asset/?id=7545971320"
-	})
-	return
-end
-
 if Potaxio then
 	StarterGui:SetCore("SendNotification",{
 		Title = "Potaxio Assistant",
@@ -25,22 +16,16 @@ end
 
 pcall(function() getgenv().Potaxio = true end)
 
-local character = Players.LocalPlayer:FindFirstChild("Character")
-local humanoid
+local mantisVPF = Players.LocalPlayer.PlayerGui.Menu.SelectionUI.Selection.ScrollBackground.ScrollingFrame.Mantis.ViewPortFrame
 
-if workspace:FindFirstChild("Intro") then
-	local charsLoaded = false
+if not mantisVPF.CurrentCamera then
 	StarterGui:SetCore("SendNotification",{
 		Title = "Potaxio Assistant",
-		Text = "Load characters to avoid data mismatch",
+		Text = "Load your chars to use the script",
 		Icon = "http://www.roblox.com/asset/?id=7545971320"
 	})
-	while charsLoaded == false do
-		task.wait(2)
-		if not workspace:FindFirstChild("Intro") then
-			charsLoaded = true
-		end
-	end
+	pcall(function() getgenv().Potaxio = false end)
+	return
 end
 
 if Players.LocalPlayer.PlayerGui:FindFirstChild("FarmingAid") then
@@ -1196,6 +1181,9 @@ end
 local camera = workspace.Camera
 local cameraCFrame
 
+local character
+local humanoid
+
 local teleportState = false
 local clickState = false
 local deathState = false
@@ -1214,7 +1202,10 @@ local leaveRadius = 0
 
 local skin = Players.LocalPlayer.PlayerGui.Menu.SelectionUI.Skins.PromRaven.Button
 skin.Parent = Players.LocalPlayer.PlayerGui.Menu
+skin.Size = UDim2.new(1,1,0.2,1)
 local deploy = Players.LocalPlayer.PlayerGui.Menu.SelectionUI.Deploy
+deploy.Position = UDim2.new(1, -210, 1, -300)
+deploy.Size = UDim2.new(0.2,1,0.09,1)
 local VIM = game:GetService("VirtualInputManager")
 
 Lighting.ColorDeath:Destroy()
