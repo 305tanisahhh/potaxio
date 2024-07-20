@@ -20,6 +20,7 @@ if game.PlaceId ~= 12062942034 then
 		Text = "The script should run in Heroes: Online World",
 		Icon = "http://www.roblox.com/asset/?id=7545971320"
 	})
+	return
 end
 
 pcall(function() getgenv().Potaxio = true end)
