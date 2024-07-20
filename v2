@@ -17,7 +17,7 @@ end
 if game.PlaceId ~= 12062942034 then
 	StarterGui:SetCore("SendNotification",{
 		Title = "Potaxio Assistant",
-		Text = "The script may only be run in Heroes: Online World",
+		Text = "The script should run in Heroes: Online World",
 		Icon = "http://www.roblox.com/asset/?id=7545971320"
 	})
 end
