@@ -1,3 +1,26 @@
+local mantisVPF = Players.LocalPlayer.PlayerGui.Menu.SelectionUI.Selection.ScrollBackground.ScrollingFrame.Mantis.ViewportFrame
+
+local function checkCurrentCamera()
+	if not mantisVPF.CurrentCamera then
+		StarterGui:SetCore("SendNotification", {
+			Title = "Potaxio Assistant",
+			Text = "Load your characters to prevent data corruption",
+		})
+		return
+	else
+		pcall(function() getgenv().Potaxio = true end)
+	end
+end
+
+checkCurrentCamera()
+if not Potaxio then
+	return
+end
+
+mantisVPF:GetPropertyChangedSignal("CurrentCamera"):Connect(function()
+	checkCurrentCamera()
+end)
+
 local teleportButton
 local cameraButton
 local killButton
