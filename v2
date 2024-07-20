@@ -23,19 +23,29 @@ if game.PlaceId ~= 12062942034 then
 	return
 end
 
-pcall(function() getgenv().Potaxio = true end)
+local mantisVPF = Players.LocalPlayer.PlayerGui.Menu.SelectionUI.Selection.ScrollBackground.ScrollingFrame.Mantis.ViewportFrame
 
-local mantisVPF = Players.LocalPlayer.PlayerGui.Menu.SelectionUI.Selection.ScrollBackground.ScrollingFrame.Mantis.ViewPortFrame
+local function checkCurrentCamera()
+	if not mantisVPF.CurrentCamera then
+		StarterGui:SetCore("SendNotification", {
+			Title = "Potaxio Assistant",
+			Text = "Load your characters to prevent data corruption",
+			Icon = "http://www.roblox.com/asset/?id=7545971320"
+		})
+		return
+	else
+		pcall(function() getgenv().Potaxio = true end)
+	end
+end
 
-if not mantisVPF.CurrentCamera then
-	StarterGui:SetCore("SendNotification",{
-		Title = "Potaxio Assistant",
-		Text = "Load your chars to use the script",
-		Icon = "http://www.roblox.com/asset/?id=7545971320"
-	})
-	pcall(function() getgenv().Potaxio = false end)
+checkCurrentCamera()
+if not Potaxio then
 	return
 end
+
+mantisVPF:GetPropertyChangedSignal("CurrentCamera"):Connect(function()
+	checkCurrentCamera()
+end)
 
 if Players.LocalPlayer.PlayerGui:FindFirstChild("FarmingAid") then
 	Players.LocalPlayer.PlayerGui.FarmingAid:Destroy()
@@ -45,7 +55,7 @@ local player = Players.LocalPlayer
 local playerName = ""
 
 --Create Gui
-local FarmingAid = Instance.new("ScreenGui")
+local Potaxio = Instance.new("ScreenGui")
 local MainFrame = Instance.new("Frame")
 local UICorner = Instance.new("UICorner")
 local UIGradient = Instance.new("UIGradient")
@@ -143,26 +153,36 @@ local FullButton = Instance.new("TextButton")
 local UICorner_39 = Instance.new("UICorner")
 local DeactivateButton = Instance.new("TextButton")
 local UICorner_40 = Instance.new("UICorner")
-local ASGButton = Instance.new("TextButton")
+local CharLabel = Instance.new("TextLabel")
+local PromRavenButton = Instance.new("TextButton")
 local UICorner_41 = Instance.new("UICorner")
-local ASBButton = Instance.new("TextButton")
+local GreenLanternButton = Instance.new("TextButton")
 local UICorner_42 = Instance.new("UICorner")
-local SKtOGButton = Instance.new("TextButton")
+local BumblebeeButton = Instance.new("TextButton")
 local UICorner_43 = Instance.new("UICorner")
-local CKLabel = Instance.new("TextLabel")
-local KeybindLabel = Instance.new("TextLabel")
+local PromZatButton = Instance.new("TextButton")
+local UICorner_44 = Instance.new("UICorner")
+local ZeusButton = Instance.new("TextButton")
+local UICorner_45 = Instance.new("UICorner")
+local SabrinaButton = Instance.new("TextButton")
+local UICorner_46 = Instance.new("UICorner")
 local UIScale = Instance.new("UIScale")
+local Frame = Instance.new("Frame")
+local T = Instance.new("ImageButton")
+local Cooldown = Instance.new("ImageLabel")
+local Time = Instance.new("TextLabel")
+local TextLabel = Instance.new("TextLabel")
+local T_2 = Instance.new("ImageLabel")
 
 --Properties:
 
-FarmingAid.Name = "FarmingAid"
-FarmingAid.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-FarmingAid.ResetOnSpawn = false
-FarmingAid.IgnoreGuiInset = true
-FarmingAid.DisplayOrder = 9
+Potaxio.Name = "Potaxio"
+Potaxio.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+Potaxio.DisplayOrder = 9
+Potaxio.ResetOnSpawn = false
 
 MainFrame.Name = "MainFrame"
-MainFrame.Parent = FarmingAid
+MainFrame.Parent = Potaxio
 MainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
 MainFrame.BackgroundColor3 = Color3.fromRGB(44, 43, 41)
 MainFrame.BackgroundTransparency = 0.500
@@ -710,7 +730,6 @@ Main.BorderColor3 = Color3.fromRGB(0, 0, 0)
 Main.BorderSizePixel = 0
 Main.Position = UDim2.new(0.0125000002, 0, 0.0250000004, 0)
 Main.Size = UDim2.new(0.975000024, 0, 0.949999988, 0)
-Main.Visible = true
 
 UsernameBox.Name = "UsernameBox"
 UsernameBox.Parent = Main
@@ -1096,16 +1115,141 @@ DeactivateButton.TextWrapped = true
 UICorner_40.CornerRadius = UDim.new(0.375, 0)
 UICorner_40.Parent = DeactivateButton
 
+CharLabel.Name = "CharLabel"
+CharLabel.Parent = Settings
+CharLabel.AnchorPoint = Vector2.new(0.5, 0)
+CharLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+CharLabel.BackgroundTransparency = 1.000
+CharLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+CharLabel.BorderSizePixel = 0
+CharLabel.Position = UDim2.new(0.5, 0, 0.300000012, 0)
+CharLabel.Size = UDim2.new(0.600000024, 0, 0.100000001, 0)
+CharLabel.Font = Enum.Font.Code
+CharLabel.Text = "Farm as..."
+CharLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+CharLabel.TextScaled = true
+CharLabel.TextSize = 20.000
+CharLabel.TextWrapped = true
+
+PromRavenButton.Name = "PromRavenButton"
+PromRavenButton.Parent = Settings
+PromRavenButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+PromRavenButton.BackgroundTransparency = 1.000
+PromRavenButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+PromRavenButton.BorderSizePixel = 0
+PromRavenButton.Position = UDim2.new(0.0250000004, 0, 0.400000006, 0)
+PromRavenButton.Size = UDim2.new(0.449999988, 0, 0.075000003, 0)
+PromRavenButton.Font = Enum.Font.Code
+PromRavenButton.Text = "Prom Raven"
+PromRavenButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+PromRavenButton.TextScaled = true
+PromRavenButton.TextSize = 14.000
+PromRavenButton.TextWrapped = true
+
+UICorner_41.CornerRadius = UDim.new(0.375, 0)
+UICorner_41.Parent = PromRavenButton
+
+GreenLanternButton.Name = "GreenLanternButton"
+GreenLanternButton.Parent = Settings
+GreenLanternButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+GreenLanternButton.BackgroundTransparency = 1.000
+GreenLanternButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+GreenLanternButton.BorderSizePixel = 0
+GreenLanternButton.Position = UDim2.new(0.0250000004, 0, 0.5, 0)
+GreenLanternButton.Size = UDim2.new(0.449999988, 0, 0.075000003, 0)
+GreenLanternButton.Font = Enum.Font.Code
+GreenLanternButton.Text = "Green Lantern"
+GreenLanternButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+GreenLanternButton.TextScaled = true
+GreenLanternButton.TextSize = 14.000
+GreenLanternButton.TextWrapped = true
+
+UICorner_42.CornerRadius = UDim.new(0.375, 0)
+UICorner_42.Parent = GreenLanternButton
+
+BumblebeeButton.Name = "BumblebeeButton"
+BumblebeeButton.Parent = Settings
+BumblebeeButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+BumblebeeButton.BackgroundTransparency = 1.000
+BumblebeeButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+BumblebeeButton.BorderSizePixel = 0
+BumblebeeButton.Position = UDim2.new(0.0250000004, 0, 0.600000024, 0)
+BumblebeeButton.Size = UDim2.new(0.449999988, 0, 0.075000003, 0)
+BumblebeeButton.Font = Enum.Font.Code
+BumblebeeButton.Text = "Bumblebee"
+BumblebeeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+BumblebeeButton.TextScaled = true
+BumblebeeButton.TextSize = 14.000
+BumblebeeButton.TextWrapped = true
+
+UICorner_43.CornerRadius = UDim.new(0.375, 0)
+UICorner_43.Parent = BumblebeeButton
+
+PromZatButton.Name = "PromZatButton"
+PromZatButton.Parent = Settings
+PromZatButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+PromZatButton.BackgroundTransparency = 1.000
+PromZatButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+PromZatButton.BorderSizePixel = 0
+PromZatButton.Position = UDim2.new(0.524999976, 0, 0.400000006, 0)
+PromZatButton.Size = UDim2.new(0.449999988, 0, 0.075000003, 0)
+PromZatButton.Font = Enum.Font.Code
+PromZatButton.Text = "Prom Zatanna"
+PromZatButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+PromZatButton.TextScaled = true
+PromZatButton.TextSize = 14.000
+PromZatButton.TextWrapped = true
+
+UICorner_44.CornerRadius = UDim.new(0.375, 0)
+UICorner_44.Parent = PromZatButton
+
+ZeusButton.Name = "ZeusButton"
+ZeusButton.Parent = Settings
+ZeusButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+ZeusButton.BackgroundTransparency = 1.000
+ZeusButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+ZeusButton.BorderSizePixel = 0
+ZeusButton.Position = UDim2.new(0.524999976, 0, 0.5, 0)
+ZeusButton.Size = UDim2.new(0.449999988, 0, 0.075000003, 0)
+ZeusButton.Font = Enum.Font.Code
+ZeusButton.Text = "Zeus"
+ZeusButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+ZeusButton.TextScaled = true
+ZeusButton.TextSize = 14.000
+ZeusButton.TextWrapped = true
+
+UICorner_45.CornerRadius = UDim.new(0.375, 0)
+UICorner_45.Parent = ZeusButton
+
+SabrinaButton.Name = "SabrinaButton"
+SabrinaButton.Parent = Settings
+SabrinaButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+SabrinaButton.BackgroundTransparency = 1.000
+SabrinaButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+SabrinaButton.BorderSizePixel = 0
+SabrinaButton.Position = UDim2.new(0.524999976, 0, 0.600000024, 0)
+SabrinaButton.Size = UDim2.new(0.449999988, 0, 0.075000003, 0)
+SabrinaButton.Font = Enum.Font.Code
+SabrinaButton.Text = "Sabrina"
+SabrinaButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+SabrinaButton.TextScaled = true
+SabrinaButton.TextSize = 14.000
+SabrinaButton.TextWrapped = true
+
+UICorner_46.CornerRadius = UDim.new(0.375, 0)
+UICorner_46.Parent = SabrinaButton
+
 UIScale.Parent = MainFrame
 
-local T = Instance.new("ImageButton")
-local Cooldown = Instance.new("ImageLabel")
-local Time = Instance.new("TextLabel")
-local TextLabel = Instance.new("TextLabel")
-local T_2 = Instance.new("ImageLabel")
+Frame.Parent = Potaxio
+Frame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Frame.BackgroundTransparency = 1.000
+Frame.BorderSizePixel = 0
+Frame.Position = UDim2.new(0.340116858, 0, 0.799360514, 0)
+Frame.Size = UDim2.new(0.319440603, 0, 0.155508056, 0)
 
 T.Name = "T"
-T.Parent = player.PlayerGui.Profile.KeysHolder
+T.Parent = Frame
 T.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 T.BackgroundTransparency = 1.000
 T.BorderColor3 = Color3.fromRGB(0, 0, 0)
@@ -1144,14 +1288,13 @@ Time.TextColor3 = Color3.fromRGB(255, 255, 255)
 Time.TextSize = 17.000
 
 TextLabel.Parent = T
-TextLabel.Font = Enum.Font.Gotham
 TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 TextLabel.BackgroundTransparency = 1.000
 TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
 TextLabel.BorderSizePixel = 0
 TextLabel.Position = UDim2.new(-0.0756913498, 0, -0.0966703147, 0)
 TextLabel.Size = UDim2.new(0.664327681, 0, 0.445104539, 0)
-TextLabel.Font = Enum.Font.SourceSansBold
+TextLabel.Font = Enum.Font.Unknown
 TextLabel.Text = "T"
 TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
 TextLabel.TextScaled = true
@@ -1169,7 +1312,7 @@ T_2.Position = UDim2.new(0.0904242843, 0, 0.180041954, 0)
 T_2.Size = UDim2.new(0.817416012, 0, 0.650940955, 0)
 T_2.Image = "http://www.roblox.com/asset/?id=7545971320"
 
-for i,v in pairs(FarmingAid:GetDescendants()) do
+for i,v in pairs(Potaxio:GetDescendants()) do
 	if v:IsA("TextButton") or v:IsA("TextBox") then
 		local UIStroke = Instance.new("UIStroke")
 		UIStroke.Color = Color3.fromRGB(172, 171, 172)
@@ -1211,51 +1354,34 @@ local leaveRadius = 0
 
 local skin = Players.LocalPlayer.PlayerGui.Menu.SelectionUI.Skins.PromRaven.Button
 skin.Parent = Players.LocalPlayer.PlayerGui.Menu
-skin.Size = UDim2.new(1,1,0.2,1)
 local deploy = Players.LocalPlayer.PlayerGui.Menu.SelectionUI.Deploy
-deploy.Position = UDim2.new(1, -210, 1, -300)
-deploy.Size = UDim2.new(0.2,1,0.09,1)
 local VIM = game:GetService("VirtualInputManager")
 
 Lighting.ColorDeath:Destroy()
 Lighting.BlurDeath:Destroy()
 
 --Main
-AllButton.MouseButton1Click:Connect(function()
-	teleportState = true
-	TeleportStatus.BackgroundColor3 = Color3.new(0, 255, 0)
-	clickState = true
-	DeployStatus.BackgroundColor3 = Color3.new(0, 255, 0)
-	killState = true
-	DeathStatus.BackgroundColor3 = Color3.new(0, 255, 0)
-end)
-
 local function teleportToPlayer()
-	local autoTeleportActive = true
-	local xShift = 0
-
-	local function teleportToPlayerInternal(shiftX)
-		local player = game.Players:FindFirstChild(playerName)
-		if player and player.Character then
-			local humanoidRootPart = player.Character:FindFirstChild("HumanoidRootPart")
+	while teleportState == true do
+		local targetPlayer = game.Players:FindFirstChild(playerName)
+		if targetPlayer and targetPlayer.Character then
+			local humanoidRootPart = targetPlayer.Character:FindFirstChild("HumanoidRootPart")
 			if humanoidRootPart then
-				local newX = humanoidRootPart.Position.X + shiftX -- Calculate new x-coordinate
-				local newPosition = Vector3.new(newX, humanoidRootPart.Position.Y, humanoidRootPart.Position.Z)
+				local newX = humanoidRootPart.Position.X + xShift
+				local newY = humanoidRootPart.Position.Y + yShift
+				local newZ = humanoidRootPart.Position.Z + zShift
+				local newPosition = Vector3.new(newX, newY, newZ)
 				game.Players.LocalPlayer.Character:MoveTo(newPosition)
 			end
 		end
-	end
-
-	while teleportState == true do
-		if autoTeleportActive then
-			teleportToPlayerInternal(xShift)
-		end
-		wait(0)
+		task.wait(0)
 	end
 end
 
+
 TeleportButton.MouseButton1Click:Connect(function()
 	teleportState = not teleportState
+	teleportToPlayer()
 	if teleportState == true then
 		TeleportStatus.BackgroundColor3 = Color3.new(0, 255, 0)
 	else
@@ -1270,16 +1396,17 @@ local function autoDeploy()
 			skin.Visible = true
 			VIM:SendMouseButtonEvent(skin.AbsolutePosition.X + skin.AbsoluteSize.X / 2, skin.AbsolutePosition.Y + skin.AbsoluteSize.Y / 2, 0, true, nil, 0)
 			VIM:SendMouseButtonEvent(skin.AbsolutePosition.X + skin.AbsoluteSize.X / 2, skin.AbsolutePosition.Y + skin.AbsoluteSize.Y / 2, 0, false, nil, 0)
-			wait(0.01)
+			task.wait(clicksPerSecond)
 			VIM:SendMouseButtonEvent(deploy.AbsolutePosition.X + deploy.AbsoluteSize.X / 2, deploy.AbsolutePosition.Y + deploy.AbsoluteSize.Y / 2, 0, true, nil, 0)
 			VIM:SendMouseButtonEvent(deploy.AbsolutePosition.X + deploy.AbsoluteSize.X / 2, deploy.AbsolutePosition.Y + deploy.AbsoluteSize.Y / 2, 0, false, nil, 0)
 		end	
-		wait(clicksPerSecond)
+		task.wait()
 	end
 end
 
 DeployButton.MouseButton1Click:Connect(function()
 	clickState = not clickState
+	autoDeploy()
 	if clickState == true then
 		DeployStatus.BackgroundColor3 = Color3.new(0, 255, 0)
 	else
@@ -1287,17 +1414,13 @@ DeployButton.MouseButton1Click:Connect(function()
 	end
 end)
 
-local function updateDeathState()
-	if killState then
+DeathButton.MouseButton1Click:Connect(function()
+	deathState = not deathState
+	if deathState then
 		DeathStatus.BackgroundColor3 = Color3.new(0, 1, 0)
 	else
 		DeathStatus.BackgroundColor3 = Color3.new(1, 0, 0)
 	end
-end
-
-DeathButton.MouseButton1Click:Connect(function()
-	killState = not killState
-	updateDeathState()
 end)
 
 local function updateCharacter(newCharacter)
@@ -1306,11 +1429,19 @@ local function updateCharacter(newCharacter)
 
 	T.Parent = player.PlayerGui.Profile.KeysHolder
 
-	humanoid:GetPropertyChangedSignal("Health"):Connect(function()
-		if character and killState then
+	local lastHit = character:GetAttribute(LastHitBy)
+	
+	if not lastHit then
+		humanoid:GetPropertyChangedSignal("Health"):Connect(function()
+			if character then
+				character:GetAttribute(LastHitBy)
+			end
+		end)
+	elseif lastHit then
+		if deathState and lastHit == playerName then
 			humanoid.Health = 0
 		end
-	end)
+	end
 
 	character.Destroying:Connect(function()
 		character = nil
@@ -1318,18 +1449,27 @@ local function updateCharacter(newCharacter)
 	end)
 end
 
-player.CharacterAdded:Connect(updateCharacter)
-
 if player.Character then
 	updateCharacter(player.Character)
 end
+
+AllButton.MouseButton1Click:Connect(function()
+	teleportState = true
+	teleportToPlayer()
+	TeleportStatus.BackgroundColor3 = Color3.new(0, 255, 0)
+	clickState = true
+	autoDeploy()
+	DeployStatus.BackgroundColor3 = Color3.new(0, 255, 0)
+	deathState = true
+	DeathStatus.BackgroundColor3 = Color3.new(0, 255, 0)
+end)
 
 DisableButton.MouseButton1Click:Connect(function()
 	teleportState = false
 	TeleportStatus.BackgroundColor3 = Color3.new(255, 0, 0)
 	clickState = false
 	DeployStatus.BackgroundColor3 = Color3.new(255, 0, 0)
-	killState = false
+	deathState = false
 	DeathStatus.BackgroundColor3 = Color3.new(255, 0, 0)
 end)
 
@@ -1529,13 +1669,37 @@ FullButton.MouseButton1Click:Connect(function()
 	UIScale.Scale = 2
 end)
 
+PromRavenButton.MouseButton1Click:Connect(function()
+	skin = Players.LocalPlayer.PlayerGui.Menu.SelectionUI.Skins.PromRaven.Button
+end)
+
+PromZatButton.MouseButton1Click:Connect(function()
+	skin = Players.LocalPlayer.PlayerGui.Menu.SelectionUI.Skins.ZatProm.Button
+end)
+
+GreenLanternButton.MouseButton1Click:Connect(function()
+	skin = Players.LocalPlayer.PlayerGui.Menu.SelectionUI.Skins.JohnLantern.Button
+end)
+
+BumblebeeButton.MouseButton1Click:Connect(function()
+	skin = Players.LocalPlayer.PlayerGui.Menu.SelectionUI.Selection.ScrollBackground.ScrollingFrame.BumbleBee.Button
+end)
+
+ZeusButton.MouseButton1Click:Connect(function()
+	skin = Players.LocalPlayer.PlayerGui.Menu.SelectionUI.Skins.ThorZeus.Button
+end)
+
+SabrinaButton.MouseButton1Click:Connect(function()
+	skin = Players.LocalPlayer.PlayerGui.Menu.SelectionUI.Selection.ScrollBackground.ScrollingFrame.Sabrina.Button
+end)
+
 DeactivateButton.MouseButton1Click:Connect(function()
 	teleportState = false
-	killState = false
+	deathState = false
 	cameraState = false
 	coreGui = true
 	StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.All, true)
-	FarmingAid:Destroy()
+	Potaxio:Destroy()
 	script:Destroy()
 	T:Destroy()
 	pcall(function() getgenv().Potaxio = false end)
@@ -1598,40 +1762,10 @@ Players.PlayerAdded:Connect(function(player)
 	Players.LocalPlayer:Kick("A user of conflice has joined the server (tester/admin)")
 end)
 
-local function handlePlayerDeath(character)
-	local humanoid = character:WaitForChild("Humanoid")
-	local isPlayerDead = false
-	local debounce = false
-
-	local function onHealthChanged(health)
-		if not isPlayerDead and killState and not debounce then
-			debounce = true
-			humanoid.Health = 0
-			wait(1)
-			debounce = false
-		end
-	end
-
-	local function onDeath()
-		isPlayerDead = true
-	end
-
-	humanoid.HealthChanged:Connect(onHealthChanged)
-	humanoid.Died:Connect(onDeath)
-end
-
 local function waitForRespawn()
-	local character = player.Character or player.CharacterAdded:Wait()
-	handlePlayerDeath(character)
-	while teleportState == true do
-		teleportToPlayer()
-		wait()
-	end
+	teleportToPlayer()
+	autoDeploy()
+	updateCharacter()
 end
-
-
-player.CharacterAdded:Connect(function(character)
-handlePlayerDeath(character)
-end)
 
 player.CharacterAdded:Connect(waitForRespawn)
