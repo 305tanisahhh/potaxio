@@ -5,7 +5,7 @@ local VIM = game:GetService("VirtualInputManager")
 local UserInputService = game:GetService("UserInputService")
 local StarterGui = game:GetService("StarterGui")
 
-if not game.PlaceId == 12062942034 then
+if game.PlaceId ~= 12062942034 then
 	StarterGui:SetCore("SendNotification",{
 		Title = "Potaxio Assistant",
 		Text = "This script only works in Heroes: Online World",
@@ -32,7 +32,7 @@ if workspace:FindFirstChild("Intro") then
 	local charsLoaded = false
 	StarterGui:SetCore("SendNotification",{
 		Title = "Potaxio Assistant",
-		Text = "Load your chars to use the script",
+		Text = "Load characters to avoid data mismatch",
 		Icon = "http://www.roblox.com/asset/?id=7545971320"
 	})
 	while charsLoaded == false do
@@ -1231,6 +1231,7 @@ AllButton.MouseButton1Click:Connect(function()
 	DeployStatus.BackgroundColor3 = Color3.new(0, 255, 0)
 	killState = true
 	DeathStatus.BackgroundColor3 = Color3.new(0, 255, 0)
+	teleportToPlayer()
 end)
 
 local function teleportToPlayer()
