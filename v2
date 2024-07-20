@@ -1231,7 +1231,6 @@ AllButton.MouseButton1Click:Connect(function()
 	DeployStatus.BackgroundColor3 = Color3.new(0, 255, 0)
 	killState = true
 	DeathStatus.BackgroundColor3 = Color3.new(0, 255, 0)
-	teleportToPlayer()
 end)
 
 local function teleportToPlayer()
