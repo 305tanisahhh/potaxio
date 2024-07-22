@@ -30,7 +30,7 @@ local function checkCurrentCamera()
 	if not mantisVPF.CurrentCamera then
 		StarterGui:SetCore("SendNotification", {
 			Title = "Potaxio Assistant",
-			Text = "Load your characters to prevent data corruption, then run it",
+			Text = "Load your characters to prevent data corruption",
 			Icon = "http://www.roblox.com/asset/?id=7545971320"
 		})
 		return
