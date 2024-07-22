@@ -5,6 +5,7 @@ local VIM = game:GetService("VirtualInputManager")
 local UserInputService = game:GetService("UserInputService")
 local StarterGui = game:GetService("StarterGui")
 
+--Checks
 if Potaxio then
 	StarterGui:SetCore("SendNotification",{
 		Title = "Potaxio Assistant",
@@ -29,7 +30,7 @@ local function checkCurrentCamera()
 	if not mantisVPF.CurrentCamera then
 		StarterGui:SetCore("SendNotification", {
 			Title = "Potaxio Assistant",
-			Text = "Load your characters to prevent data corruption",
+			Text = "Load your characters to prevent data corruption, then run it",
 			Icon = "http://www.roblox.com/asset/?id=7545971320"
 		})
 		return
@@ -49,10 +50,12 @@ end)
 
 if Players.LocalPlayer.PlayerGui:FindFirstChild("FarmingAid") then
 	Players.LocalPlayer.PlayerGui.FarmingAid:Destroy()
+	StarterGui:SetCore("SendNotification", {
+		Title = "Potaxio Assistant",
+		Text = "The old GUI has been destroyed... How?",
+		Icon = "http://www.roblox.com/asset/?id=7545971320"
+	})
 end
-
-local player = Players.LocalPlayer
-local playerName = ""
 
 --Create Gui
 local Potaxio = Instance.new("ScreenGui")
@@ -81,47 +84,49 @@ local UICorner_10 = Instance.new("UICorner")
 local Other = Instance.new("Frame")
 local BlackButton = Instance.new("TextButton")
 local UICorner_11 = Instance.new("UICorner")
-local CameraButton = Instance.new("TextButton")
-local UICorner_12 = Instance.new("UICorner")
 local CoreGuiButton = Instance.new("TextButton")
-local UICorner_13 = Instance.new("UICorner")
+local UICorner_12 = Instance.new("UICorner")
 local LowGFXButton = Instance.new("TextButton")
-local UICorner_14 = Instance.new("UICorner")
+local UICorner_13 = Instance.new("UICorner")
 local ClicksLabel = Instance.new("TextLabel")
 local ClicksBox = Instance.new("TextBox")
-local UICorner_15 = Instance.new("UICorner")
+local UICorner_14 = Instance.new("UICorner")
 local xBox = Instance.new("TextBox")
-local UICorner_16 = Instance.new("UICorner")
+local UICorner_15 = Instance.new("UICorner")
 local TOLabel = Instance.new("TextLabel")
 local yBox = Instance.new("TextBox")
-local UICorner_17 = Instance.new("UICorner")
+local UICorner_16 = Instance.new("UICorner")
 local zBox = Instance.new("TextBox")
-local UICorner_18 = Instance.new("UICorner")
+local UICorner_17 = Instance.new("UICorner")
 local LOSRLabel = Instance.new("TextLabel")
 local RadiusLabel = Instance.new("TextLabel")
 local RadiusBox = Instance.new("TextBox")
-local UICorner_19 = Instance.new("UICorner")
+local UICorner_18 = Instance.new("UICorner")
 local LSRBox = Instance.new("TextBox")
-local UICorner_20 = Instance.new("UICorner")
+local UICorner_19 = Instance.new("UICorner")
 local DetectButton = Instance.new("TextButton")
+local UICorner_20 = Instance.new("UICorner")
+local CameraButton = Instance.new("TextButton")
 local UICorner_21 = Instance.new("UICorner")
-local MainPage = Instance.new("TextButton")
+local CharsGuiButton = Instance.new("TextButton")
 local UICorner_22 = Instance.new("UICorner")
-local OtherPage = Instance.new("TextButton")
+local MainPage = Instance.new("TextButton")
 local UICorner_23 = Instance.new("UICorner")
-local SettingsPage = Instance.new("TextButton")
+local OtherPage = Instance.new("TextButton")
 local UICorner_24 = Instance.new("UICorner")
-local TeleportsPage = Instance.new("TextButton")
+local SettingsPage = Instance.new("TextButton")
 local UICorner_25 = Instance.new("UICorner")
+local TeleportsPage = Instance.new("TextButton")
+local UICorner_26 = Instance.new("UICorner")
 local Main = Instance.new("Frame")
 local UsernameBox = Instance.new("TextBox")
-local UICorner_26 = Instance.new("UICorner")
-local TeleportButton = Instance.new("TextButton")
 local UICorner_27 = Instance.new("UICorner")
-local DeployButton = Instance.new("TextButton")
+local TeleportButton = Instance.new("TextButton")
 local UICorner_28 = Instance.new("UICorner")
-local DeathButton = Instance.new("TextButton")
+local DeployButton = Instance.new("TextButton")
 local UICorner_29 = Instance.new("UICorner")
+local DeathButton = Instance.new("TextButton")
+local UICorner_30 = Instance.new("UICorner")
 local TeleportLabel = Instance.new("TextLabel")
 local DeployLabel = Instance.new("TextLabel")
 local DeathLabel = Instance.new("TextLabel")
@@ -129,43 +134,39 @@ local TeleportStatus = Instance.new("Frame")
 local DeployStatus = Instance.new("Frame")
 local DeathStatus = Instance.new("Frame")
 local AllButton = Instance.new("TextButton")
-local UICorner_30 = Instance.new("UICorner")
-local GoalBox = Instance.new("TextBox")
 local UICorner_31 = Instance.new("UICorner")
+local GoalBox = Instance.new("TextBox")
+local UICorner_32 = Instance.new("UICorner")
 local KoCALabel = Instance.new("TextLabel")
 local DisableButton = Instance.new("TextButton")
-local UICorner_32 = Instance.new("UICorner")
-local ChatSpyButton = Instance.new("TextButton")
 local UICorner_33 = Instance.new("UICorner")
-local InfiniteYieldButton = Instance.new("TextButton")
+local ChatSpyButton = Instance.new("TextButton")
 local UICorner_34 = Instance.new("UICorner")
-local Settings = Instance.new("Frame")
-local ScaleLabel = Instance.new("TextLabel")
-local SmallButton = Instance.new("TextButton")
+local InfiniteYieldButton = Instance.new("TextButton")
 local UICorner_35 = Instance.new("UICorner")
-local NormalButton = Instance.new("TextButton")
-local UICorner_36 = Instance.new("UICorner")
-local LargeButton = Instance.new("TextButton")
-local UICorner_37 = Instance.new("UICorner")
-local VLargeButton = Instance.new("TextButton")
-local UICorner_38 = Instance.new("UICorner")
-local FullButton = Instance.new("TextButton")
-local UICorner_39 = Instance.new("UICorner")
+local Settings = Instance.new("Frame")
+local UISizeLabel = Instance.new("TextLabel")
 local DeactivateButton = Instance.new("TextButton")
-local UICorner_40 = Instance.new("UICorner")
+local UICorner_36 = Instance.new("UICorner")
 local CharLabel = Instance.new("TextLabel")
 local PromRavenButton = Instance.new("TextButton")
-local UICorner_41 = Instance.new("UICorner")
+local UICorner_37 = Instance.new("UICorner")
 local GreenLanternButton = Instance.new("TextButton")
-local UICorner_42 = Instance.new("UICorner")
+local UICorner_38 = Instance.new("UICorner")
 local BumblebeeButton = Instance.new("TextButton")
-local UICorner_43 = Instance.new("UICorner")
+local UICorner_39 = Instance.new("UICorner")
 local PromZatButton = Instance.new("TextButton")
-local UICorner_44 = Instance.new("UICorner")
+local UICorner_40 = Instance.new("UICorner")
 local ZeusButton = Instance.new("TextButton")
-local UICorner_45 = Instance.new("UICorner")
+local UICorner_41 = Instance.new("UICorner")
 local SabrinaButton = Instance.new("TextButton")
-local UICorner_46 = Instance.new("UICorner")
+local UICorner_42 = Instance.new("UICorner")
+local DraggerBase = Instance.new("Frame")
+local Dragger = Instance.new("Frame")
+local ScaleLabel2 = Instance.new("TextLabel")
+local ScaleLabel3 = Instance.new("TextLabel")
+local ScaleLabel = Instance.new("TextLabel")
+local UICorner_43 = Instance.new("UICorner")
 local UIScale = Instance.new("UIScale")
 local Frame = Instance.new("Frame")
 local T = Instance.new("ImageButton")
@@ -387,7 +388,7 @@ BlackButton.BackgroundTransparency = 1.000
 BlackButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
 BlackButton.BorderSizePixel = 0
 BlackButton.Position = UDim2.new(0.0250000004, 0, 0, 0)
-BlackButton.Size = UDim2.new(0.949999988, 0, 0.075000003, 0)
+BlackButton.Size = UDim2.new(0.5, 0, 0.075000003, 0)
 BlackButton.Font = Enum.Font.Code
 BlackButton.Text = "Black Screen"
 BlackButton.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -397,24 +398,6 @@ BlackButton.TextWrapped = true
 
 UICorner_11.CornerRadius = UDim.new(0.375, 0)
 UICorner_11.Parent = BlackButton
-
-CameraButton.Name = "CameraButton"
-CameraButton.Parent = Other
-CameraButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-CameraButton.BackgroundTransparency = 1.000
-CameraButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
-CameraButton.BorderSizePixel = 0
-CameraButton.Position = UDim2.new(0.0250000004, 0, 0.200000003, 0)
-CameraButton.Size = UDim2.new(0.949999988, 0, 0.075000003, 0)
-CameraButton.Font = Enum.Font.Code
-CameraButton.Text = "Lock Camera"
-CameraButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-CameraButton.TextScaled = true
-CameraButton.TextSize = 14.000
-CameraButton.TextWrapped = true
-
-UICorner_12.CornerRadius = UDim.new(0.375, 0)
-UICorner_12.Parent = CameraButton
 
 CoreGuiButton.Name = "CoreGuiButton"
 CoreGuiButton.Parent = Other
@@ -431,8 +414,8 @@ CoreGuiButton.TextScaled = true
 CoreGuiButton.TextSize = 14.000
 CoreGuiButton.TextWrapped = true
 
-UICorner_13.CornerRadius = UDim.new(0.375, 0)
-UICorner_13.Parent = CoreGuiButton
+UICorner_12.CornerRadius = UDim.new(0.375, 0)
+UICorner_12.Parent = CoreGuiButton
 
 LowGFXButton.Name = "LowGFXButton"
 LowGFXButton.Parent = Other
@@ -440,8 +423,8 @@ LowGFXButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 LowGFXButton.BackgroundTransparency = 1.000
 LowGFXButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
 LowGFXButton.BorderSizePixel = 0
-LowGFXButton.Position = UDim2.new(0.0250000004, 0, 0.100000001, 0)
-LowGFXButton.Size = UDim2.new(0.949999988, 0, 0.075000003, 0)
+LowGFXButton.Position = UDim2.new(0.574999988, 0, 0, 0)
+LowGFXButton.Size = UDim2.new(0.400000006, 0, 0.075000003, 0)
 LowGFXButton.Font = Enum.Font.Code
 LowGFXButton.Text = "LowGFX"
 LowGFXButton.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -449,8 +432,8 @@ LowGFXButton.TextScaled = true
 LowGFXButton.TextSize = 14.000
 LowGFXButton.TextWrapped = true
 
-UICorner_14.CornerRadius = UDim.new(0.375, 0)
-UICorner_14.Parent = LowGFXButton
+UICorner_13.CornerRadius = UDim.new(0.375, 0)
+UICorner_13.Parent = LowGFXButton
 
 ClicksLabel.Name = "ClicksLabel"
 ClicksLabel.Parent = Other
@@ -483,8 +466,8 @@ ClicksBox.TextScaled = true
 ClicksBox.TextSize = 14.000
 ClicksBox.TextWrapped = true
 
-UICorner_15.CornerRadius = UDim.new(0.375, 0)
-UICorner_15.Parent = ClicksBox
+UICorner_14.CornerRadius = UDim.new(0.375, 0)
+UICorner_14.Parent = ClicksBox
 
 xBox.Name = "xBox"
 xBox.Parent = Other
@@ -503,8 +486,8 @@ xBox.TextScaled = true
 xBox.TextSize = 14.000
 xBox.TextWrapped = true
 
-UICorner_16.CornerRadius = UDim.new(0.375, 0)
-UICorner_16.Parent = xBox
+UICorner_15.CornerRadius = UDim.new(0.375, 0)
+UICorner_15.Parent = xBox
 
 TOLabel.Name = "TOLabel"
 TOLabel.Parent = Other
@@ -539,8 +522,8 @@ yBox.TextScaled = true
 yBox.TextSize = 14.000
 yBox.TextWrapped = true
 
-UICorner_17.CornerRadius = UDim.new(0.375, 0)
-UICorner_17.Parent = yBox
+UICorner_16.CornerRadius = UDim.new(0.375, 0)
+UICorner_16.Parent = yBox
 
 zBox.Name = "zBox"
 zBox.Parent = Other
@@ -559,8 +542,8 @@ zBox.TextScaled = true
 zBox.TextSize = 14.000
 zBox.TextWrapped = true
 
-UICorner_18.CornerRadius = UDim.new(0.375, 0)
-UICorner_18.Parent = zBox
+UICorner_17.CornerRadius = UDim.new(0.375, 0)
+UICorner_17.Parent = zBox
 
 LOSRLabel.Name = "LOSRLabel"
 LOSRLabel.Parent = Other
@@ -602,15 +585,16 @@ RadiusBox.BorderSizePixel = 0
 RadiusBox.Position = UDim2.new(0.0250000004, 0, 0.774999976, 0)
 RadiusBox.Size = UDim2.new(0.150000006, 0, 0.100000001, 0)
 RadiusBox.Font = Enum.Font.Code
-RadiusBox.PlaceholderText = "3072"
+RadiusBox.PlaceholderColor3 = Color3.fromRGB(178, 178, 178)
+RadiusBox.PlaceholderText = "2048"
 RadiusBox.Text = ""
 RadiusBox.TextColor3 = Color3.fromRGB(0, 0, 0)
 RadiusBox.TextScaled = true
 RadiusBox.TextSize = 14.000
 RadiusBox.TextWrapped = true
 
-UICorner_19.CornerRadius = UDim.new(0.375, 0)
-UICorner_19.Parent = RadiusBox
+UICorner_18.CornerRadius = UDim.new(0.375, 0)
+UICorner_18.Parent = RadiusBox
 
 LSRBox.Name = "LSRBox"
 LSRBox.Parent = Other
@@ -629,8 +613,8 @@ LSRBox.TextScaled = true
 LSRBox.TextSize = 14.000
 LSRBox.TextWrapped = true
 
-UICorner_20.CornerRadius = UDim.new(0.375, 0)
-UICorner_20.Parent = LSRBox
+UICorner_19.CornerRadius = UDim.new(0.375, 0)
+UICorner_19.Parent = LSRBox
 
 DetectButton.Name = "DetectButton"
 DetectButton.Parent = Other
@@ -647,8 +631,44 @@ DetectButton.TextScaled = true
 DetectButton.TextSize = 14.000
 DetectButton.TextWrapped = true
 
+UICorner_20.CornerRadius = UDim.new(0.375, 0)
+UICorner_20.Parent = DetectButton
+
+CameraButton.Name = "CameraButton"
+CameraButton.Parent = Other
+CameraButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+CameraButton.BackgroundTransparency = 1.000
+CameraButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+CameraButton.BorderSizePixel = 0
+CameraButton.Position = UDim2.new(0.0250000004, 0, 0.200000003, 0)
+CameraButton.Size = UDim2.new(0.949999988, 0, 0.075000003, 0)
+CameraButton.Font = Enum.Font.Code
+CameraButton.Text = "Lock Camera to Character"
+CameraButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+CameraButton.TextScaled = true
+CameraButton.TextSize = 14.000
+CameraButton.TextWrapped = true
+
 UICorner_21.CornerRadius = UDim.new(0.375, 0)
-UICorner_21.Parent = DetectButton
+UICorner_21.Parent = CameraButton
+
+CharsGuiButton.Name = "CharsGuiButton"
+CharsGuiButton.Parent = Other
+CharsGuiButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+CharsGuiButton.BackgroundTransparency = 1.000
+CharsGuiButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+CharsGuiButton.BorderSizePixel = 0
+CharsGuiButton.Position = UDim2.new(0.0250000004, 0, 0.100000001, 0)
+CharsGuiButton.Size = UDim2.new(0.949999988, 0, 0.075000003, 0)
+CharsGuiButton.Font = Enum.Font.Code
+CharsGuiButton.Text = "Disable Character Gui"
+CharsGuiButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+CharsGuiButton.TextScaled = true
+CharsGuiButton.TextSize = 14.000
+CharsGuiButton.TextWrapped = true
+
+UICorner_22.CornerRadius = UDim.new(0.375, 0)
+UICorner_22.Parent = CharsGuiButton
 
 MainPage.Name = "MainPage"
 MainPage.Parent = MainFrame
@@ -665,8 +685,8 @@ MainPage.TextScaled = true
 MainPage.TextSize = 14.000
 MainPage.TextWrapped = true
 
-UICorner_22.CornerRadius = UDim.new(0.375, 0)
-UICorner_22.Parent = MainPage
+UICorner_23.CornerRadius = UDim.new(0.375, 0)
+UICorner_23.Parent = MainPage
 
 OtherPage.Name = "OtherPage"
 OtherPage.Parent = MainFrame
@@ -683,8 +703,8 @@ OtherPage.TextScaled = true
 OtherPage.TextSize = 14.000
 OtherPage.TextWrapped = true
 
-UICorner_23.CornerRadius = UDim.new(0.375, 0)
-UICorner_23.Parent = OtherPage
+UICorner_24.CornerRadius = UDim.new(0.375, 0)
+UICorner_24.Parent = OtherPage
 
 SettingsPage.Name = "SettingsPage"
 SettingsPage.Parent = MainFrame
@@ -701,8 +721,8 @@ SettingsPage.TextScaled = true
 SettingsPage.TextSize = 14.000
 SettingsPage.TextWrapped = true
 
-UICorner_24.CornerRadius = UDim.new(0.375, 0)
-UICorner_24.Parent = SettingsPage
+UICorner_25.CornerRadius = UDim.new(0.375, 0)
+UICorner_25.Parent = SettingsPage
 
 TeleportsPage.Name = "TeleportsPage"
 TeleportsPage.Parent = MainFrame
@@ -719,8 +739,8 @@ TeleportsPage.TextScaled = true
 TeleportsPage.TextSize = 14.000
 TeleportsPage.TextWrapped = true
 
-UICorner_25.CornerRadius = UDim.new(0.375, 0)
-UICorner_25.Parent = TeleportsPage
+UICorner_26.CornerRadius = UDim.new(0.375, 0)
+UICorner_26.Parent = TeleportsPage
 
 Main.Name = "Main"
 Main.Parent = MainFrame
@@ -730,6 +750,7 @@ Main.BorderColor3 = Color3.fromRGB(0, 0, 0)
 Main.BorderSizePixel = 0
 Main.Position = UDim2.new(0.0125000002, 0, 0.0250000004, 0)
 Main.Size = UDim2.new(0.975000024, 0, 0.949999988, 0)
+Main.Visible = true
 
 UsernameBox.Name = "UsernameBox"
 UsernameBox.Parent = Main
@@ -748,8 +769,8 @@ UsernameBox.TextScaled = true
 UsernameBox.TextSize = 14.000
 UsernameBox.TextWrapped = true
 
-UICorner_26.CornerRadius = UDim.new(0.375, 0)
-UICorner_26.Parent = UsernameBox
+UICorner_27.CornerRadius = UDim.new(0.375, 0)
+UICorner_27.Parent = UsernameBox
 
 TeleportButton.Name = "TeleportButton"
 TeleportButton.Parent = Main
@@ -766,8 +787,8 @@ TeleportButton.TextScaled = true
 TeleportButton.TextSize = 14.000
 TeleportButton.TextWrapped = true
 
-UICorner_27.CornerRadius = UDim.new(0.375, 0)
-UICorner_27.Parent = TeleportButton
+UICorner_28.CornerRadius = UDim.new(0.375, 0)
+UICorner_28.Parent = TeleportButton
 
 DeployButton.Name = "DeployButton"
 DeployButton.Parent = Main
@@ -784,8 +805,8 @@ DeployButton.TextScaled = true
 DeployButton.TextSize = 14.000
 DeployButton.TextWrapped = true
 
-UICorner_28.CornerRadius = UDim.new(0.375, 0)
-UICorner_28.Parent = DeployButton
+UICorner_29.CornerRadius = UDim.new(0.375, 0)
+UICorner_29.Parent = DeployButton
 
 DeathButton.Name = "DeathButton"
 DeathButton.Parent = Main
@@ -802,8 +823,8 @@ DeathButton.TextScaled = true
 DeathButton.TextSize = 14.000
 DeathButton.TextWrapped = true
 
-UICorner_29.CornerRadius = UDim.new(0.375, 0)
-UICorner_29.Parent = DeathButton
+UICorner_30.CornerRadius = UDim.new(0.375, 0)
+UICorner_30.Parent = DeathButton
 
 TeleportLabel.Name = "TeleportLabel"
 TeleportLabel.Parent = Main
@@ -890,8 +911,8 @@ AllButton.TextScaled = true
 AllButton.TextSize = 14.000
 AllButton.TextWrapped = true
 
-UICorner_30.CornerRadius = UDim.new(0.375, 0)
-UICorner_30.Parent = AllButton
+UICorner_31.CornerRadius = UDim.new(0.375, 0)
+UICorner_31.Parent = AllButton
 
 GoalBox.Name = "GoalBox"
 GoalBox.Parent = Main
@@ -909,8 +930,8 @@ GoalBox.TextScaled = true
 GoalBox.TextSize = 14.000
 GoalBox.TextWrapped = true
 
-UICorner_31.CornerRadius = UDim.new(0.375, 0)
-UICorner_31.Parent = GoalBox
+UICorner_32.CornerRadius = UDim.new(0.375, 0)
+UICorner_32.Parent = GoalBox
 
 KoCALabel.Name = "KoCALabel"
 KoCALabel.Parent = Main
@@ -942,8 +963,8 @@ DisableButton.TextScaled = true
 DisableButton.TextSize = 14.000
 DisableButton.TextWrapped = true
 
-UICorner_32.CornerRadius = UDim.new(0.375, 0)
-UICorner_32.Parent = DisableButton
+UICorner_33.CornerRadius = UDim.new(0.375, 0)
+UICorner_33.Parent = DisableButton
 
 ChatSpyButton.Name = "ChatSpyButton"
 ChatSpyButton.Parent = Main
@@ -960,8 +981,8 @@ ChatSpyButton.TextScaled = true
 ChatSpyButton.TextSize = 14.000
 ChatSpyButton.TextWrapped = true
 
-UICorner_33.CornerRadius = UDim.new(0.375, 0)
-UICorner_33.Parent = ChatSpyButton
+UICorner_34.CornerRadius = UDim.new(0.375, 0)
+UICorner_34.Parent = ChatSpyButton
 
 InfiniteYieldButton.Name = "InfiniteYieldButton"
 InfiniteYieldButton.Parent = Main
@@ -978,8 +999,8 @@ InfiniteYieldButton.TextScaled = true
 InfiniteYieldButton.TextSize = 14.000
 InfiniteYieldButton.TextWrapped = true
 
-UICorner_34.CornerRadius = UDim.new(0.375, 0)
-UICorner_34.Parent = InfiniteYieldButton
+UICorner_35.CornerRadius = UDim.new(0.375, 0)
+UICorner_35.Parent = InfiniteYieldButton
 
 Settings.Name = "Settings"
 Settings.Parent = MainFrame
@@ -991,111 +1012,21 @@ Settings.Position = UDim2.new(0.0125000002, 0, 0.0250000004, 0)
 Settings.Size = UDim2.new(0.975000024, 0, 0.949999988, 0)
 Settings.Visible = false
 
-ScaleLabel.Name = "ScaleLabel"
-ScaleLabel.Parent = Settings
-ScaleLabel.AnchorPoint = Vector2.new(0.5, 0)
-ScaleLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-ScaleLabel.BackgroundTransparency = 1.000
-ScaleLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
-ScaleLabel.BorderSizePixel = 0
-ScaleLabel.Position = UDim2.new(0.5, 0, 0, 0)
-ScaleLabel.Size = UDim2.new(0.330000013, 0, 0.100000001, 0)
-ScaleLabel.Font = Enum.Font.Code
-ScaleLabel.Text = "UI Size"
-ScaleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-ScaleLabel.TextScaled = true
-ScaleLabel.TextSize = 20.000
-ScaleLabel.TextWrapped = true
-
-SmallButton.Name = "SmallButton"
-SmallButton.Parent = Settings
-SmallButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-SmallButton.BackgroundTransparency = 1.000
-SmallButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
-SmallButton.BorderSizePixel = 0
-SmallButton.Position = UDim2.new(0.0250000004, 0, 0.100000001, 0)
-SmallButton.Size = UDim2.new(0.300000012, 0, 0.075000003, 0)
-SmallButton.Font = Enum.Font.Code
-SmallButton.Text = "Small"
-SmallButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-SmallButton.TextScaled = true
-SmallButton.TextSize = 14.000
-SmallButton.TextWrapped = true
-
-UICorner_35.CornerRadius = UDim.new(0.375, 0)
-UICorner_35.Parent = SmallButton
-
-NormalButton.Name = "NormalButton"
-NormalButton.Parent = Settings
-NormalButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-NormalButton.BackgroundTransparency = 1.000
-NormalButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
-NormalButton.BorderSizePixel = 0
-NormalButton.Position = UDim2.new(0.349999994, 0, 0.100000001, 0)
-NormalButton.Size = UDim2.new(0.300000012, 0, 0.075000003, 0)
-NormalButton.Font = Enum.Font.Code
-NormalButton.Text = "Normal"
-NormalButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-NormalButton.TextScaled = true
-NormalButton.TextSize = 14.000
-NormalButton.TextWrapped = true
-
-UICorner_36.CornerRadius = UDim.new(0.375, 0)
-UICorner_36.Parent = NormalButton
-
-LargeButton.Name = "LargeButton"
-LargeButton.Parent = Settings
-LargeButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-LargeButton.BackgroundTransparency = 1.000
-LargeButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
-LargeButton.BorderSizePixel = 0
-LargeButton.Position = UDim2.new(0.675000012, 0, 0.100000001, 0)
-LargeButton.Size = UDim2.new(0.300000012, 0, 0.075000003, 0)
-LargeButton.Font = Enum.Font.Code
-LargeButton.Text = "Large"
-LargeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-LargeButton.TextScaled = true
-LargeButton.TextSize = 14.000
-LargeButton.TextWrapped = true
-
-UICorner_37.CornerRadius = UDim.new(0.375, 0)
-UICorner_37.Parent = LargeButton
-
-VLargeButton.Name = "VLargeButton"
-VLargeButton.Parent = Settings
-VLargeButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-VLargeButton.BackgroundTransparency = 1.000
-VLargeButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
-VLargeButton.BorderSizePixel = 0
-VLargeButton.Position = UDim2.new(0.0250000004, 0, 0.200000003, 0)
-VLargeButton.Size = UDim2.new(0.449999988, 0, 0.075000003, 0)
-VLargeButton.Font = Enum.Font.Code
-VLargeButton.Text = "Very Large"
-VLargeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-VLargeButton.TextScaled = true
-VLargeButton.TextSize = 14.000
-VLargeButton.TextWrapped = true
-
-UICorner_38.CornerRadius = UDim.new(0.375, 0)
-UICorner_38.Parent = VLargeButton
-
-FullButton.Name = "FullButton"
-FullButton.Parent = Settings
-FullButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-FullButton.BackgroundTransparency = 1.000
-FullButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
-FullButton.BorderSizePixel = 0
-FullButton.Position = UDim2.new(0.524999976, 0, 0.200000003, 0)
-FullButton.Size = UDim2.new(0.449999988, 0, 0.075000003, 0)
-FullButton.Font = Enum.Font.Code
-FullButton.Text = "Full"
-FullButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-FullButton.TextScaled = true
-FullButton.TextSize = 14.000
-FullButton.TextWrapped = true
-
-UICorner_39.CornerRadius = UDim.new(0.375, 0)
-UICorner_39.Parent = FullButton
+UISizeLabel.Name = "UISizeLabel"
+UISizeLabel.Parent = Settings
+UISizeLabel.AnchorPoint = Vector2.new(0.5, 0)
+UISizeLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+UISizeLabel.BackgroundTransparency = 1.000
+UISizeLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+UISizeLabel.BorderSizePixel = 0
+UISizeLabel.Position = UDim2.new(0.5, 0, 0, 0)
+UISizeLabel.Size = UDim2.new(0.330000013, 0, 0.100000001, 0)
+UISizeLabel.Font = Enum.Font.Code
+UISizeLabel.Text = "UI Size"
+UISizeLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+UISizeLabel.TextScaled = true
+UISizeLabel.TextSize = 20.000
+UISizeLabel.TextWrapped = true
 
 DeactivateButton.Name = "DeactivateButton"
 DeactivateButton.Parent = Settings
@@ -1112,8 +1043,8 @@ DeactivateButton.TextScaled = true
 DeactivateButton.TextSize = 14.000
 DeactivateButton.TextWrapped = true
 
-UICorner_40.CornerRadius = UDim.new(0.375, 0)
-UICorner_40.Parent = DeactivateButton
+UICorner_36.CornerRadius = UDim.new(0.375, 0)
+UICorner_36.Parent = DeactivateButton
 
 CharLabel.Name = "CharLabel"
 CharLabel.Parent = Settings
@@ -1146,8 +1077,8 @@ PromRavenButton.TextScaled = true
 PromRavenButton.TextSize = 14.000
 PromRavenButton.TextWrapped = true
 
-UICorner_41.CornerRadius = UDim.new(0.375, 0)
-UICorner_41.Parent = PromRavenButton
+UICorner_37.CornerRadius = UDim.new(0.375, 0)
+UICorner_37.Parent = PromRavenButton
 
 GreenLanternButton.Name = "GreenLanternButton"
 GreenLanternButton.Parent = Settings
@@ -1164,8 +1095,8 @@ GreenLanternButton.TextScaled = true
 GreenLanternButton.TextSize = 14.000
 GreenLanternButton.TextWrapped = true
 
-UICorner_42.CornerRadius = UDim.new(0.375, 0)
-UICorner_42.Parent = GreenLanternButton
+UICorner_38.CornerRadius = UDim.new(0.375, 0)
+UICorner_38.Parent = GreenLanternButton
 
 BumblebeeButton.Name = "BumblebeeButton"
 BumblebeeButton.Parent = Settings
@@ -1182,8 +1113,8 @@ BumblebeeButton.TextScaled = true
 BumblebeeButton.TextSize = 14.000
 BumblebeeButton.TextWrapped = true
 
-UICorner_43.CornerRadius = UDim.new(0.375, 0)
-UICorner_43.Parent = BumblebeeButton
+UICorner_39.CornerRadius = UDim.new(0.375, 0)
+UICorner_39.Parent = BumblebeeButton
 
 PromZatButton.Name = "PromZatButton"
 PromZatButton.Parent = Settings
@@ -1200,8 +1131,8 @@ PromZatButton.TextScaled = true
 PromZatButton.TextSize = 14.000
 PromZatButton.TextWrapped = true
 
-UICorner_44.CornerRadius = UDim.new(0.375, 0)
-UICorner_44.Parent = PromZatButton
+UICorner_40.CornerRadius = UDim.new(0.375, 0)
+UICorner_40.Parent = PromZatButton
 
 ZeusButton.Name = "ZeusButton"
 ZeusButton.Parent = Settings
@@ -1218,8 +1149,8 @@ ZeusButton.TextScaled = true
 ZeusButton.TextSize = 14.000
 ZeusButton.TextWrapped = true
 
-UICorner_45.CornerRadius = UDim.new(0.375, 0)
-UICorner_45.Parent = ZeusButton
+UICorner_41.CornerRadius = UDim.new(0.375, 0)
+UICorner_41.Parent = ZeusButton
 
 SabrinaButton.Name = "SabrinaButton"
 SabrinaButton.Parent = Settings
@@ -1236,8 +1167,75 @@ SabrinaButton.TextScaled = true
 SabrinaButton.TextSize = 14.000
 SabrinaButton.TextWrapped = true
 
-UICorner_46.CornerRadius = UDim.new(0.375, 0)
-UICorner_46.Parent = SabrinaButton
+UICorner_42.CornerRadius = UDim.new(0.375, 0)
+UICorner_42.Parent = SabrinaButton
+
+DraggerBase.Name = "DraggerBase"
+DraggerBase.Parent = Settings
+DraggerBase.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+DraggerBase.BorderColor3 = Color3.fromRGB(0, 0, 0)
+DraggerBase.BorderSizePixel = 0
+DraggerBase.Position = UDim2.new(0.0250000004, 0, 0.125, 0)
+DraggerBase.Size = UDim2.new(0.949999988, 0, 0.00499999989, 0)
+
+Dragger.Name = "Dragger"
+Dragger.Parent = DraggerBase
+Dragger.AnchorPoint = Vector2.new(0.5, 0.5)
+Dragger.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Dragger.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Dragger.BorderSizePixel = 0
+Dragger.Position = UDim2.new(0.5, 0, 0, 0)
+Dragger.Size = UDim2.new(0.0500000007, 0, 10, 0)
+Dragger.ZIndex = 2
+
+ScaleLabel2.Name = "ScaleLabel2"
+ScaleLabel2.Parent = Settings
+ScaleLabel2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+ScaleLabel2.BackgroundTransparency = 1.000
+ScaleLabel2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+ScaleLabel2.BorderSizePixel = 0
+ScaleLabel2.Position = UDim2.new(0.0250000004, 0, 0.150000006, 0)
+ScaleLabel2.Size = UDim2.new(0.150000006, 0, 0.075000003, 0)
+ScaleLabel2.Font = Enum.Font.Code
+ScaleLabel2.Text = "0.5"
+ScaleLabel2.TextColor3 = Color3.fromRGB(255, 255, 255)
+ScaleLabel2.TextScaled = true
+ScaleLabel2.TextSize = 20.000
+ScaleLabel2.TextWrapped = true
+
+ScaleLabel3.Name = "ScaleLabel3"
+ScaleLabel3.Parent = Settings
+ScaleLabel3.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+ScaleLabel3.BackgroundTransparency = 1.000
+ScaleLabel3.BorderColor3 = Color3.fromRGB(0, 0, 0)
+ScaleLabel3.BorderSizePixel = 0
+ScaleLabel3.Position = UDim2.new(0.875, 0, 0.150000006, 0)
+ScaleLabel3.Size = UDim2.new(0.100000001, 0, 0.075000003, 0)
+ScaleLabel3.Font = Enum.Font.Code
+ScaleLabel3.Text = "2"
+ScaleLabel3.TextColor3 = Color3.fromRGB(255, 255, 255)
+ScaleLabel3.TextScaled = true
+ScaleLabel3.TextSize = 20.000
+ScaleLabel3.TextWrapped = true
+
+ScaleLabel.Name = "ScaleLabel"
+ScaleLabel.Parent = Settings
+ScaleLabel.AnchorPoint = Vector2.new(0.5, 0)
+ScaleLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+ScaleLabel.BackgroundTransparency = 1.000
+ScaleLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+ScaleLabel.BorderSizePixel = 0
+ScaleLabel.Position = UDim2.new(0.5, 0, 0.174999997, 0)
+ScaleLabel.Size = UDim2.new(0.200000003, 0, 0.100000001, 0)
+ScaleLabel.Font = Enum.Font.Code
+ScaleLabel.Text = "1"
+ScaleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+ScaleLabel.TextScaled = true
+ScaleLabel.TextSize = 20.000
+ScaleLabel.TextWrapped = true
+
+UICorner_43.CornerRadius = UDim.new(0.375, 0)
+UICorner_43.Parent = ScaleLabel
 
 UIScale.Parent = MainFrame
 
@@ -1257,6 +1255,7 @@ T.BorderSizePixel = 0
 T.Position = UDim2.new(-0.203999996, 0, 0.256999999, 0)
 T.Size = UDim2.new(0.184600502, 0, 0.742539585, 0)
 T.Image = "http://www.roblox.com/asset/?id=7106581838"
+T.Visible = false
 
 Cooldown.Name = "Cooldown"
 Cooldown.Parent = T
@@ -1330,20 +1329,30 @@ for i,v in pairs(Potaxio:GetDescendants()) do
 end
 
 --Variables for Functions
+local player = Players.LocalPlayer
+local playerGui = player:FindFirstChild("PlayerGui")
+local playerName
+
 local camera = workspace.Camera
 local cameraCFrame
+local cameraConnection
 
 local character
 local humanoid
 
-local teleportState = false
-local clickState = false
-local deathState = false
+local states = {
+	teleportState = false,
+	clickState = false,
+	deathState = false
+}
+
 local coreGui = true
 
 local cooldown = false
 
-local clicksPerSecond = 0
+local charsGui = false
+
+local clicksPerSecond = 0.1
 
 local xShift = 0
 local yShift = 0
@@ -1352,8 +1361,9 @@ local zShift = 0
 local detectionRadius = 3072
 local leaveRadius = 0
 
-local skin = Players.LocalPlayer.PlayerGui.Menu.SelectionUI.Skins.PromRaven.Button
-skin.Parent = Players.LocalPlayer.PlayerGui.Menu
+local skinsFrame = Players.LocalPlayer.PlayerGui.Menu.SelectionUI.Skins
+skinsFrame.AutomaticSize = Enum.AutomaticSize.X
+local skin = Players.LocalPlayer.PlayerGui.Menu.SelectionUI.Skins.PromRaven
 local deploy = Players.LocalPlayer.PlayerGui.Menu.SelectionUI.Deploy
 local VIM = game:GetService("VirtualInputManager")
 
@@ -1361,12 +1371,31 @@ Lighting.ColorDeath:Destroy()
 Lighting.BlurDeath:Destroy()
 
 --Main
+local function updateStatus(stateName, value)
+	local color = value and Color3.new(0, 1, 0) or Color3.new(1, 0, 0)
+	if stateName == "teleportState" then
+		TeleportStatus.BackgroundColor3 = color
+	elseif stateName == "clickState" then
+		DeployStatus.BackgroundColor3 = color
+	elseif stateName == "deathState" then
+		DeathStatus.BackgroundColor3 = color
+	end
+end
+
+setmetatable(states, {
+	__newindex = function(table, key, value)
+		rawset(table, key, value)
+		updateStatus(key, value)
+	end
+})
+
 local function teleportToPlayer()
-	while teleportState == true do
+	TeleportStatus.BackgroundColor3 = Color3.new(0,1,0)
+	while states.teleportState do
 		local targetPlayer = game.Players:FindFirstChild(playerName)
 		if targetPlayer and targetPlayer.Character then
 			local humanoidRootPart = targetPlayer.Character:FindFirstChild("HumanoidRootPart")
-			if humanoidRootPart then
+			if humanoidRootPart and player.Character then
 				local newX = humanoidRootPart.Position.X + xShift
 				local newY = humanoidRootPart.Position.Y + yShift
 				local newZ = humanoidRootPart.Position.Z + zShift
@@ -1374,24 +1403,16 @@ local function teleportToPlayer()
 				game.Players.LocalPlayer.Character:MoveTo(newPosition)
 			end
 		end
-		task.wait(0)
+		task.wait()
 	end
+	TeleportStatus.BackgroundColor3 = Color3.new(1,0,0)
 end
 
-
-TeleportButton.MouseButton1Click:Connect(function()
-	teleportState = not teleportState
-	teleportToPlayer()
-	if teleportState == true then
-		TeleportStatus.BackgroundColor3 = Color3.new(0, 255, 0)
-	else
-		TeleportStatus.BackgroundColor3 = Color3.new(255, 0, 0)
-	end
-end)
-
 local function autoDeploy()
-	while clickState == true do
+	DeployStatus.BackgroundColor3 = Color3.new(0,1,0)
+	while states.clickState do
 		if not player or not player.Character or not player.Character:FindFirstChild("Humanoid") then
+			skinsFrame.Visible = true
 			deploy.Visible = true
 			skin.Visible = true
 			VIM:SendMouseButtonEvent(skin.AbsolutePosition.X + skin.AbsoluteSize.X / 2, skin.AbsolutePosition.Y + skin.AbsoluteSize.Y / 2, 0, true, nil, 0)
@@ -1402,75 +1423,107 @@ local function autoDeploy()
 		end	
 		task.wait()
 	end
+	DeployStatus.BackgroundColor3 = Color3.new(1,0,0)
 end
 
+TeleportButton.MouseButton1Click:Connect(function()
+	if not playerName then
+		StarterGui:SetCore("SendNotification",{
+			Title = "Potaxio Assistant",
+			Text = "Enter a username to start farming",
+			Icon = "http://www.roblox.com/asset/?id=7545971320"
+		})
+		return
+	end
+
+	states.teleportState = not states.teleportState
+
+	if states.teleportState then
+		coroutine.wrap(teleportToPlayer)()
+	end
+end)
+
 DeployButton.MouseButton1Click:Connect(function()
-	clickState = not clickState
-	autoDeploy()
-	if clickState == true then
-		DeployStatus.BackgroundColor3 = Color3.new(0, 255, 0)
-	else
-		DeployStatus.BackgroundColor3 = Color3.new(255, 0, 0)
+	if not playerName then
+		StarterGui:SetCore("SendNotification",{
+			Title = "Potaxio Assistant",
+			Text = "Enter a username to start farming",
+			Icon = "http://www.roblox.com/asset/?id=7545971320"
+		})
+		return
+	end
+
+	states.clickState = not states.clickState
+
+	if states.clickState then
+		coroutine.wrap(autoDeploy)()
 	end
 end)
 
-DeathButton.MouseButton1Click:Connect(function()
-	deathState = not deathState
-	if deathState then
-		DeathStatus.BackgroundColor3 = Color3.new(0, 1, 0)
-	else
-		DeathStatus.BackgroundColor3 = Color3.new(1, 0, 0)
-	end
-end)
-
-local function updateCharacter(newCharacter)
-	character = newCharacter
-	humanoid = character:FindFirstChild("Humanoid")
-
-	T.Parent = player.PlayerGui.Profile.KeysHolder
-
-	local lastHit = character:GetAttribute(LastHitBy)
+local function killOnHit()
+	local humanoid = Players.LocalPlayer.Character:WaitForChild("Humanoid")
+	local isPlayerDead = false
 	
-	if not lastHit then
-		humanoid:GetPropertyChangedSignal("Health"):Connect(function()
-			if character then
-				character:GetAttribute(LastHitBy)
-			end
-		end)
-	elseif lastHit then
-		if deathState and lastHit == playerName then
+	if states.deathState == true then
+		DeathStatus.BackgroundColor3 = Color3.new(0,1,0)
+	elseif states.deathState == false then
+		DeathStatus.BackgroundColor3 = Color3.new(1,0,0) 
+	else
+		DeathStatus.BackgroundColor3 = Color3.new(1,1,0)
+	end
+
+	humanoid.HealthChanged:Connect(function()
+		if not isPlayerDead and states.deathState then
 			humanoid.Health = 0
 		end
-	end
+	end)
 
-	character.Destroying:Connect(function()
-		character = nil
-		humanoid = nil
+	humanoid.Died:Connect(function()
+		isPlayerDead = true
+		T.Visible = false
 	end)
 end
 
-if player.Character then
-	updateCharacter(player.Character)
-end
+DeathButton.MouseButton1Click:Connect(function()
+	if not playerName then
+		StarterGui:SetCore("SendNotification", {
+			Title = "Potaxio Assistant",
+			Text = "Enter a username to start farming",
+			Icon = "http://www.roblox.com/asset/?id=7545971320"
+		})
+		return
+	end
+
+	states.deathState = not states.deathState
+
+	if player.Character then
+		killOnHit(player.Character)
+	end
+end)
 
 AllButton.MouseButton1Click:Connect(function()
-	teleportState = true
-	teleportToPlayer()
-	TeleportStatus.BackgroundColor3 = Color3.new(0, 255, 0)
-	clickState = true
-	autoDeploy()
-	DeployStatus.BackgroundColor3 = Color3.new(0, 255, 0)
-	deathState = true
-	DeathStatus.BackgroundColor3 = Color3.new(0, 255, 0)
+	if not playerName then
+		StarterGui:SetCore("SendNotification",{
+			Title = "Potaxio Assistant",
+			Text = "Enter a username to start farming",
+			Icon = "http://www.roblox.com/asset/?id=7545971320"
+		})
+		return
+	end
+	
+	states.teleportState = true
+	states.clickState = true
+	states.deathState = true
+	
+	coroutine.wrap(teleportToPlayer)()
+	coroutine.wrap(autoDeploy)()
+	killOnHit()
 end)
 
 DisableButton.MouseButton1Click:Connect(function()
-	teleportState = false
-	TeleportStatus.BackgroundColor3 = Color3.new(255, 0, 0)
-	clickState = false
-	DeployStatus.BackgroundColor3 = Color3.new(255, 0, 0)
-	deathState = false
-	DeathStatus.BackgroundColor3 = Color3.new(255, 0, 0)
+	states.teleportState = false
+	states.clickState = false
+	states.deathState = false
 end)
 
 ChatSpyButton.MouseButton1Click:Connect(function()
@@ -1548,14 +1601,36 @@ LowGFXButton.MouseButton1Click:Connect(function()
 	end)
 end)
 
+local function lockCamera()
+	cameraConnection = function()
+		while cameraState == true do
+			camera.CameraType = Enum.CameraType.Custom
+		end
+	end
+end
+
 CameraButton.MouseButton1Click:Connect(function()
-	cameraCFrame = camera.CFrame
 	if cameraState == false then
 		cameraState = true
-		camera.CameraType = Enum.CameraType.Scriptable
+		lockCamera()
 	else
 		cameraState = false
-		camera.CameraType = Enum.CameraType.Custom
+		if cameraConnection then
+			cameraConnection:Disconnect()
+		end
+	end
+end)
+
+CharsGuiButton.MouseButton1Click:Connect(function()
+	local selection = Players.LocalPlayer.PlayerGui.Menu.SelectionUI.Selection
+	local statistics = Players.LocalPlayer.PlayerGui.Menu.SelectionUI.Statistics
+	
+	if charsGui == false then
+		selection.Visible = false
+		statistics.Visible = false
+	elseif charsGui == true then
+		selection.Visible = true
+		statistics.Visible = true
 	end
 end)
 
@@ -1569,9 +1644,10 @@ CoreGuiButton.MouseButton1Click:Connect(function()
 	end
 end)
 
-
 ClicksBox.FocusLost:Connect(function()
-	clicksPerSecond = ClicksBox.Text
+	local inputClicksText = ClicksBox.Text
+	clicksPerSecond = (1/inputClicksText)
+	
 end)
 
 xBox.FocusLost:Connect(function()
@@ -1649,53 +1725,34 @@ WundagoreButton.MouseButton1Click:Connect(function()
 end)
 
 --Settings
-SmallButton.MouseButton1Click:Connect(function()
-	UIScale.Scale = 0.75
-end)
-
-NormalButton.MouseButton1Click:Connect(function()
-	UIScale.Scale = 1
-end)
-
-LargeButton.MouseButton1Click:Connect(function()
-	UIScale.Scale = 1.25
-end)
-
-VLargeButton.MouseButton1Click:Connect(function()
-	UIScale.Scale = 1.6
-end)
-
-FullButton.MouseButton1Click:Connect(function()
-	UIScale.Scale = 2
-end)
-
 PromRavenButton.MouseButton1Click:Connect(function()
-	skin = Players.LocalPlayer.PlayerGui.Menu.SelectionUI.Skins.PromRaven.Button
+	skin = Players.LocalPlayer.PlayerGui.Menu.SelectionUI.Skins.PromRaven
 end)
 
 PromZatButton.MouseButton1Click:Connect(function()
-	skin = Players.LocalPlayer.PlayerGui.Menu.SelectionUI.Skins.ZatProm.Button
+	skin = Players.LocalPlayer.PlayerGui.Menu.SelectionUI.Skins.ZatProm
 end)
 
 GreenLanternButton.MouseButton1Click:Connect(function()
-	skin = Players.LocalPlayer.PlayerGui.Menu.SelectionUI.Skins.JohnLantern.Button
+	skin = Players.LocalPlayer.PlayerGui.Menu.SelectionUI.Skins.JohnLantern
 end)
 
 BumblebeeButton.MouseButton1Click:Connect(function()
-	skin = Players.LocalPlayer.PlayerGui.Menu.SelectionUI.Selection.ScrollBackground.ScrollingFrame.BumbleBee.Button
+	skin = Players.LocalPlayer.PlayerGui.Menu.SelectionUI.Selection.ScrollBackground.ScrollingFrame.BumbleBee
 end)
 
 ZeusButton.MouseButton1Click:Connect(function()
-	skin = Players.LocalPlayer.PlayerGui.Menu.SelectionUI.Skins.ThorZeus.Button
+	skin = Players.LocalPlayer.PlayerGui.Menu.SelectionUI.Skins.ThorZeus
 end)
 
 SabrinaButton.MouseButton1Click:Connect(function()
-	skin = Players.LocalPlayer.PlayerGui.Menu.SelectionUI.Selection.ScrollBackground.ScrollingFrame.Sabrina.Button
+	skin = Players.LocalPlayer.PlayerGui.Menu.SelectionUI.Selection.ScrollBackground.ScrollingFrame.Sabrina
 end)
 
 DeactivateButton.MouseButton1Click:Connect(function()
-	teleportState = false
-	deathState = false
+	states.teleportState = false
+	states.clickState = false
+	states.deathState = false
 	cameraState = false
 	coreGui = true
 	StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.All, true)
@@ -1734,17 +1791,84 @@ OtherPage.MouseButton1Click:Connect(function()
 	Other.Visible = true
 end)
 
+--UI Draggable
+local UI = Dragger
+
+local Mouse = player:GetMouse()
+
+local Hovered = false
+local Holding = false
+local MoveCon = nil
+
+local InitialX, UIInitialPos
+
+local ViewPortSize = workspace.Camera.ViewportSize
+local Speed = 4
+
+local function updateScale()
+	local buff = 0.5
+	local dragged = UI.Position.X.Scale
+	local updatedScale = 1
+
+	updatedScale = buff + dragged
+
+	ScaleLabel.Text = updatedScale
+	UIScale = updatedScale
+end
+
+local function drag()
+	if Holding == false then MoveCon:Disconnect(); return end
+	local distanceMovedX = (InitialX - Mouse.X)*Speed
+
+	local Pos = UIInitialPos - UDim2.new(distanceMovedX/ViewPortSize.X, 0, 0)
+	UI.Position = UDim2.new(math.clamp(Pos.X.Scale, 0, 1-UI.Size.X.Scale), 0, math.clamp(Pos.Y.Scale, 0, 1-UI.Size.Y.Scale), 0)
+end
+
+UI.MouseEnter:Connect(function() 
+	Hovered = true 
+end)
+
+UI.MouseLeave:Connect(function() 
+	Hovered = false 
+end)
+
+UserInputService.InputBegan:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+		Holding = Hovered
+		if Holding then
+			InitialX = Mouse.X
+			UIInitialPos = UI.Position
+
+			MoveCon = Mouse.Move:Connect(drag)
+		end
+	end
+end)
+
+UserInputService.InputEnded:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then 
+		Holding = false 
+		updateScale()
+	end
+end)
+
 UsernameBox.FocusLost:Connect(function()
 	playerName = UsernameBox.Text
-	print(playerName)
-end)
-
-T.TouchTap:Connect(function()
-	MainFrame.Visible = not MainFrame.Visible
-end)
-
-player.CharacterRemoving:Connect(function()
-	T.Parent = nil
+	local playerNameValid = false
+	
+	for i, v in pairs(Players:GetPlayers()) do
+		if playerName == v.Name then
+			playerNameValid = true
+		end
+	end
+	
+	if not playerNameValid then
+		StarterGui:SetCore("SendNotification",{
+			Title = "Potaxio Assistant",
+			Text = "The username entered is not a valid player",
+			Icon = "http://www.roblox.com/asset/?id=7545971320"
+		})
+		return
+	end
 end)
 
 UserInputService.InputBegan:Connect(function(input, gameProcessed)
@@ -1752,7 +1876,7 @@ UserInputService.InputBegan:Connect(function(input, gameProcessed)
 		return
 	end
 
-	if input.KeyCode == Enum.KeyCode.T then
+	if input.KeyCode == Enum.KeyCode.T or input.UserInputType == Enum.UserInputType.Touch then
 		MainFrame.Visible = not MainFrame.Visible
 	end
 end)
@@ -1762,10 +1886,7 @@ Players.PlayerAdded:Connect(function(player)
 	Players.LocalPlayer:Kick("A user of conflice has joined the server (tester/admin)")
 end)
 
-local function waitForRespawn()
-	teleportToPlayer()
-	autoDeploy()
-	updateCharacter()
-end
-
-player.CharacterAdded:Connect(waitForRespawn)
+player.CharacterAdded:Connect(function()
+	killOnHit()
+	T.Visible = true
+end)
