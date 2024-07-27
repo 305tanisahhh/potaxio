@@ -6,6 +6,7 @@ local UserInputService = game:GetService("UserInputService")
 local StarterGui = game:GetService("StarterGui")
 local GroupService = game:GetService("GroupService")
 local TeleportService = game:GetService("TeleportService")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 --Checks
 if Potaxio then
@@ -43,12 +44,16 @@ end
 
 checkCurrentCamera()
 
-for i, v in pairs(Players:GetChildren()) do
-	if v:IsInGroup("16681008") then
-		Players.LocalPlayer:Kick(tostring(v) .. " is in the server (ADMIN)")
-		return
+local function checkForAdmins()
+	for i, v in pairs(Players:GetChildren()) do
+		if v:IsInGroup("16681008") then
+			Players.LocalPlayer:Kick(tostring(v) .. " is in the server (ADMIN)")
+			return
+		end
 	end
 end
+
+coroutine.wrap(checkForAdmins)()
 
 if not Potaxio then
 	return
@@ -465,7 +470,7 @@ ClicksBox.Size = UDim2.new(0.330000013, 0, 0.100000001, 0)
 ClicksBox.Font = Enum.Font.Code
 ClicksBox.PlaceholderText = "inf"
 ClicksBox.Text = ""
-ClicksBox.TextColor3 = Color3.fromRGB(0, 0, 0)
+ClicksBox.TextColor3 = Color3.fromRGB(255, 255, 255)
 ClicksBox.TextScaled = true
 ClicksBox.TextSize = 14.000
 ClicksBox.TextWrapped = true
@@ -485,7 +490,7 @@ xBox.Size = UDim2.new(0.100000001, 0, 0.100000001, 0)
 xBox.Font = Enum.Font.Code
 xBox.PlaceholderText = "x"
 xBox.Text = ""
-xBox.TextColor3 = Color3.fromRGB(0, 0, 0)
+xBox.TextColor3 = Color3.fromRGB(255, 255, 255)
 xBox.TextScaled = true
 xBox.TextSize = 14.000
 xBox.TextWrapped = true
@@ -521,7 +526,7 @@ yBox.Size = UDim2.new(0.100000001, 0, 0.100000001, 0)
 yBox.Font = Enum.Font.Code
 yBox.PlaceholderText = "y"
 yBox.Text = ""
-yBox.TextColor3 = Color3.fromRGB(0, 0, 0)
+yBox.TextColor3 = Color3.fromRGB(255, 255, 255)
 yBox.TextScaled = true
 yBox.TextSize = 14.000
 yBox.TextWrapped = true
@@ -541,7 +546,7 @@ zBox.Size = UDim2.new(0.100000001, 0, 0.100000001, 0)
 zBox.Font = Enum.Font.Code
 zBox.PlaceholderText = "z"
 zBox.Text = ""
-zBox.TextColor3 = Color3.fromRGB(0, 0, 0)
+zBox.TextColor3 = Color3.fromRGB(255, 255, 255)
 zBox.TextScaled = true
 zBox.TextSize = 14.000
 zBox.TextWrapped = true
@@ -592,7 +597,7 @@ RadiusBox.Font = Enum.Font.Code
 RadiusBox.PlaceholderColor3 = Color3.fromRGB(178, 178, 178)
 RadiusBox.PlaceholderText = "2048"
 RadiusBox.Text = ""
-RadiusBox.TextColor3 = Color3.fromRGB(0, 0, 0)
+RadiusBox.TextColor3 = Color3.fromRGB(255, 255, 255)
 RadiusBox.TextScaled = true
 RadiusBox.TextSize = 14.000
 RadiusBox.TextWrapped = true
@@ -612,7 +617,7 @@ LSRBox.Size = UDim2.new(0.100000001, 0, 0.100000001, 0)
 LSRBox.Font = Enum.Font.Code
 LSRBox.PlaceholderText = "0"
 LSRBox.Text = ""
-LSRBox.TextColor3 = Color3.fromRGB(0, 0, 0)
+LSRBox.TextColor3 = Color3.fromRGB(255, 255, 255)
 LSRBox.TextScaled = true
 LSRBox.TextSize = 14.000
 LSRBox.TextWrapped = true
@@ -754,7 +759,6 @@ Main.BorderColor3 = Color3.fromRGB(0, 0, 0)
 Main.BorderSizePixel = 0
 Main.Position = UDim2.new(0.0125000002, 0, 0.0250000004, 0)
 Main.Size = UDim2.new(0.975000024, 0, 0.949999988, 0)
-Main.Visible = false
 
 UsernameBox.Name = "UsernameBox"
 UsernameBox.Parent = Main
@@ -929,7 +933,7 @@ GoalBox.Size = UDim2.new(0.5, 0, 0.075000003, 0)
 GoalBox.Font = Enum.Font.Code
 GoalBox.PlaceholderText = "0"
 GoalBox.Text = ""
-GoalBox.TextColor3 = Color3.fromRGB(0, 0, 0)
+GoalBox.TextColor3 = Color3.fromRGB(255, 255, 255)
 GoalBox.TextScaled = true
 GoalBox.TextSize = 14.000
 GoalBox.TextWrapped = true
@@ -1014,6 +1018,7 @@ Settings.BorderColor3 = Color3.fromRGB(0, 0, 0)
 Settings.BorderSizePixel = 0
 Settings.Position = UDim2.new(0.0125000002, 0, 0.0250000004, 0)
 Settings.Size = UDim2.new(0.975000024, 0, 0.949999988, 0)
+Settings.Visible = false
 
 UISizeLabel.Name = "UISizeLabel"
 UISizeLabel.Parent = Settings
@@ -1280,6 +1285,10 @@ end
 local player = Players.LocalPlayer
 local playerGui = player:FindFirstChild("PlayerGui")
 local playerName
+local targetPlayer
+
+local goalValue
+local targetCoins
 
 local mouse = player:GetMouse()
 
@@ -1291,6 +1300,7 @@ local activeElement
 
 local camera = workspace.Camera
 local cameraCFrame
+local cameraStatus = false
 
 local character
 local humanoid
@@ -1300,6 +1310,8 @@ local states = {
 	clickState = false,
 	deathState = false
 }
+
+local secretSpawn = false
 
 local black = false
 
@@ -1315,8 +1327,12 @@ local xShift = 0
 local yShift = 0
 local zShift = 0
 
+local detectStatus = false
 local detectionRadius = 3072
 local leaveRadius = 0
+local detectedPlayers = {}
+local kickHitbox
+local hitbox
 
 local totalChars = 0
 
@@ -1365,15 +1381,14 @@ end
 local function teleportToPlayer()
 	TeleportStatus.BackgroundColor3 = Color3.new(0,1,0)
 	while states.teleportState do
-		local targetPlayer = game.Players:FindFirstChild(playerName)
 		if targetPlayer and targetPlayer.Character then
 			local humanoidRootPart = targetPlayer.Character:FindFirstChild("HumanoidRootPart")
-			if humanoidRootPart and player.Character then
+			if humanoidRootPart and Players.LocalPlayer.Character then
 				local newX = humanoidRootPart.Position.X + xShift
 				local newY = humanoidRootPart.Position.Y + yShift
 				local newZ = humanoidRootPart.Position.Z + zShift
 				local newPosition = Vector3.new(newX, newY, newZ)
-				game.Players.LocalPlayer.Character:MoveTo(newPosition)
+				Players.LocalPlayer.Character:MoveTo(newPosition)
 			end
 		end
 		task.wait()
@@ -1391,6 +1406,11 @@ local function autoDeploy()
 		if player.Character and cameraState then
 			camera.CameraType = Enum.CameraType.Custom
 			camera.CameraSubject = Players.LocalPlayer.Character:FindFirstChild("Humanoid")
+		end
+		if goalValue then
+			if GoalBox.Text == targetCoins.Value then
+				Players.LocalPlayer:Kick(tostring(playerName) .. " has reached " .. tostring(targetCoins.Value) .. " coins.")
+			end
 		end
 		if not player or not player.Character or not player.Character:FindFirstChild("Humanoid") then
 			skinsFrame.Visible = true
@@ -1523,9 +1543,97 @@ DisableButton.MouseButton1Click:Connect(function()
 	end
 end)
 
+local function formatNumber(value)
+	local formatted = ""
+	if value >= 1e9 then
+		formatted = string.format("%.1fB", value / 1e9)
+	elseif value >= 1e6 then
+		formatted = string.format("%.1fM", value / 1e6)
+	elseif value >= 1e3 then
+		formatted = string.format("%.1fK", value / 1e3)
+	else
+		formatted = tostring(value)
+	end
+	return formatted
+end
+
+local function convertInputToNumber(input)
+	input = input:upper()
+	local value = tonumber(input)
+	if value then
+		return value
+	elseif input:sub(-1) == "M" then
+		return tonumber(input:sub(1, -2)) * 1e6
+	elseif input:sub(-1) == "K" then
+		return tonumber(input:sub(1, -2)) * 1e3
+	else
+		return nil
+	end
+end
+
+local function convertFormattedToNumber(value)
+	local suffix = value:sub(-1):upper()
+	local number = tonumber(value:sub(1, -2))
+
+	if suffix == "M" then
+		return number * 1e6
+	elseif suffix == "K" then
+		return number * 1e3
+	else
+		return tonumber(value) -- handle values without suffix
+	end
+end
+
 GoalBox.FocusLost:Connect(function()
-	local targetLeaderstat = Players.playerName.leaderstats.Coins
-	print(targetLeaderstat)
+	local input = GoalBox.Text
+	goalValue = convertInputToNumber(input)
+
+	if goalValue then
+		-- Convert goalValue to formatted string for display
+		local formattedValue = formatNumber(goalValue)
+		GoalBox.Text = formattedValue
+	else
+		StarterGui:SetCore("SendNotification", {
+			Title = "Potaxio Assistant",
+			Text = "Please enter a number in a valid format",
+			Icon = "http://www.roblox.com/asset/?id=7545971320",
+		})
+		GoalBox.Text = ""
+		return
+	end
+
+	if targetPlayer then
+		local leaderstats = targetPlayer:FindFirstChild("leaderstats")
+		if leaderstats then
+			local coins = leaderstats:FindFirstChild("Coins")
+			if coins then
+				targetCoins = coins
+				StarterGui:SetCore("SendNotification", {
+					Title = "Potaxio Assistant",
+					Text = "Goal of ".. GoalBox.Text .. " has been set.",
+					Icon = "http://www.roblox.com/asset/?id=7545971320",
+				})
+			else
+				StarterGui:SetCore("SendNotification", {
+					Title = "Potaxio Assistant",
+					Text = "Coins stat not found",
+					Icon = "http://www.roblox.com/asset/?id=7545971320",
+				})
+			end
+		else
+			StarterGui:SetCore("SendNotification", {
+				Title = "Potaxio Assistant",
+				Text = "Leaderstats not found",
+				Icon = "http://www.roblox.com/asset/?id=7545971320",
+			})
+		end
+	else
+		StarterGui:SetCore("SendNotification", {
+			Title = "Potaxio Assistant",
+			Text = "Enter a valid username",
+			Icon = "http://www.roblox.com/asset/?id=7545971320",
+		})
+	end
 end)
 
 ChatSpyButton.MouseButton1Click:Connect(function()
@@ -1637,36 +1745,231 @@ zBox.FocusLost:Connect(function()
 	zShift = zBox.Text
 end)
 
+local function onPlayerDetected(detectedPlayer)
+	local Warning = Instance.new("Frame")
+	local IgnoreButton = Instance.new("TextButton")
+	local LeaveButton = Instance.new("TextButton")
+	local Potaxio1 = Instance.new("ImageLabel")
+	local Potaxio1_2 = Instance.new("ImageLabel")
+	local WarningLabel = Instance.new("TextLabel")
+	local UserLabel = Instance.new("TextLabel")
+
+	Warning.Name = "Warning"
+	Warning.Parent = Potaxio
+	Warning.AnchorPoint = Vector2.new(0.5, 0.5)
+	Warning.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+	Warning.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Warning.BorderSizePixel = 4
+	Warning.Position = UDim2.new(0.5, 0, 0.5, 0)
+	Warning.Size = UDim2.new(0.75, 0, 0.75, 0)
+
+	IgnoreButton.Name = "IgnoreButton"
+	IgnoreButton.Parent = Warning
+	IgnoreButton.BackgroundColor3 = Color3.fromRGB(30, 31, 32)
+	IgnoreButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	IgnoreButton.BorderSizePixel = 4
+	IgnoreButton.Position = UDim2.new(0, 0, 0.75, 0)
+	IgnoreButton.Size = UDim2.new(0.5, 0, 0.25, 0)
+	IgnoreButton.Font = Enum.Font.Sarpanch
+	IgnoreButton.Text = "IGNORE"
+	IgnoreButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+	IgnoreButton.TextScaled = true
+	IgnoreButton.TextSize = 14.000
+	IgnoreButton.TextWrapped = true
+
+	LeaveButton.Name = "LeaveButton"
+	LeaveButton.Parent = Warning
+	LeaveButton.BackgroundColor3 = Color3.fromRGB(30, 31, 32)
+	LeaveButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	LeaveButton.BorderSizePixel = 4
+	LeaveButton.Position = UDim2.new(0.5, 0, 0.75, 0)
+	LeaveButton.Size = UDim2.new(0.5, 0, 0.25, 0)
+	LeaveButton.Font = Enum.Font.Sarpanch
+	LeaveButton.Text = "LEAVE"
+	LeaveButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+	LeaveButton.TextScaled = true
+	LeaveButton.TextSize = 14.000
+	LeaveButton.TextWrapped = true
+
+	Potaxio1.Name = "Potaxio1"
+	Potaxio1.Parent = Warning
+	Potaxio1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Potaxio1.BackgroundTransparency = 1.000
+	Potaxio1.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Potaxio1.BorderSizePixel = 0
+	Potaxio1.Size = UDim2.new(0.150000006, 0, 0.200000003, 0)
+	Potaxio1.Image = "http://www.roblox.com/asset/?id=7545971320"
+
+	Potaxio1_2.Name = "Potaxio1"
+	Potaxio1_2.Parent = Warning
+	Potaxio1_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Potaxio1_2.BackgroundTransparency = 1.000
+	Potaxio1_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Potaxio1_2.BorderSizePixel = 0
+	Potaxio1_2.Position = UDim2.new(0.850000024, 0, 0, 0)
+	Potaxio1_2.Size = UDim2.new(0.150000006, 0, 0.200000003, 0)
+	Potaxio1_2.Image = "http://www.roblox.com/asset/?id=7545971320"
+
+	WarningLabel.Name = "WarningLabel"
+	WarningLabel.Parent = Warning
+	WarningLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	WarningLabel.BackgroundTransparency = 1.000
+	WarningLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	WarningLabel.BorderSizePixel = 0
+	WarningLabel.Position = UDim2.new(0.150000006, 0, 0.0250000004, 0)
+	WarningLabel.Size = UDim2.new(0.699999988, 0, 0.200000003, 0)
+	WarningLabel.Font = Enum.Font.SpecialElite
+	WarningLabel.Text = "WARNING"
+	WarningLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
+	WarningLabel.TextScaled = true
+	WarningLabel.TextSize = 14.000
+	WarningLabel.TextWrapped = true
+
+	UserLabel.Name = "UserLabel"
+	UserLabel.Parent = Warning
+	UserLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	UserLabel.BackgroundTransparency = 1.000
+	UserLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	UserLabel.BorderSizePixel = 0
+	UserLabel.Position = UDim2.new(0, 0, 0.200000003, 0)
+	UserLabel.Size = UDim2.new(1, 0, 0.550000012, 0)
+	UserLabel.Font = Enum.Font.Unknown
+	UserLabel.Text = tostring(detectedPlayer) .. " has reached the hitbox"
+	UserLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
+	UserLabel.TextScaled = true
+	UserLabel.TextSize = 14.000
+	UserLabel.TextWrapped = true
+
+	-- Play sound effect
+	local sound = Instance.new("Sound")
+	sound.SoundId = "rbxassetid://16912113221"
+	sound.Volume = 1
+	sound.PlayOnRemove = true
+	sound.Parent = workspace
+	sound:Destroy()
+	
+	detectedPlayers[detectedPlayer.Name] = true
+	
+	LeaveButton.MouseButton1Click:Connect(function()
+		Players.LocalPlayer:Kick(tostring(detectedPlayer) .. " was in the hitbox")
+	end)
+	
+	IgnoreButton.MouseButton1Click:Connect(function()
+		Warning:Destroy()
+	end)
+
+	delay(60, function()
+		detectedPlayers[detectedPlayer.Name] = nil
+	end)
+end
+
 DetectButton.MouseButton1Click:Connect(function()
-	if not playerName then
-		StarterGui:SetCore("SendNotification",{
+	if not playerName or not targetPlayer then
+		StarterGui:SetCore("SendNotification", {
 			Title = "Potaxio Assistant",
 			Text = "A username must be set to detect players",
-			Icon = "http://www.roblox.com/asset/?id=7545971320"
+			Icon = "http://www.roblox.com/asset/?id=7545971320",
 		})
+		return
+	end
+	
+	detectStatus = not detectStatus
+	
+	if detectStatus == false then
+		hitbox:Destroy()
+		return
 	end
 
-	local hitbox = Instance.new("Part")
+	workspace.FallenPartsDestroyHeight = -99999
+
+	hitbox = Instance.new("Part")
 	hitbox.Size = Vector3.new(detectionRadius, detectionRadius, detectionRadius)
-	hitbox.Position = Players.playerName.Character.HumanoidRootPart.Position
-	hitbox.Anchored = true
+	hitbox.Anchored = false
 	hitbox.CanCollide = false
 	hitbox.Transparency = 1
-	hitbox.Parent = workspace
-	hitbox.Touched:Connect(function(otherPart)
-		local checkPlayer = Players:GetPlayerFromCharacter(otherPart.Parent)
-		if checkPlayer.Name ~= Players.LocalPlayer.Name or checkPlayer.Name ~= playerName then
-			StarterGui:SetCore("SendNotification",{
-				Title = "Potaxio Assistant",
-				Text = tostring(checkPlayer) .. " has reached the hitbox",
-				Icon = "http://www.roblox.com/asset/?id=7545971320"
-			})
-			local sound = Instance.new("Sound")
-			sound.SoundId = "rbxassetid://16912113221"
-			sound.PlayOnRemove = true
-			sound:Destroy()
+	hitbox.Parent = targetPlayer.Character.HumanoidRootPart
+	hitbox.Massless = true
+
+	local weld = Instance.new("WeldConstraint")
+	weld.Part0 = hitbox
+	weld.Part1 = targetPlayer.Character:FindFirstChild("HumanoidRootPart")
+	weld.Parent = hitbox
+
+	local function onHit(otherPart)
+		local charModel = otherPart:FindFirstAncestorOfClass("Model")
+		local checkPlayer = Players:GetPlayerFromCharacter(charModel)
+		if not checkPlayer and charModel then
+			local checkAdvance = charModel:FindFirstAncestorOfClass("Model")
+			checkPlayer = Players:GetPlayerFromCharacter(checkAdvance)
+			if not checkPlayer then
+				return
+			end
 		end
-	end)
+		if checkPlayer and not detectedPlayers[checkPlayer.Name] and checkPlayer.Name ~= Players.LocalPlayer.Name and checkPlayer.Name ~= targetPlayer.Name then
+			onPlayerDetected(checkPlayer)
+		end
+	end
+
+	hitbox.Touched:Connect(onHit)
+end)
+
+RadiusBox.FocusLost:Connect(function()
+	if RadiusBox.Text == "" then
+		return
+	end
+	detectionRadius = RadiusBox.Text
+	hitbox.Size = Vector3.new(detectionRadius, detectionRadius, detectionRadius)
+end)
+
+local function createOrUpdateHitbox()
+	if kickHitbox then
+		kickHitbox:Destroy()
+	end
+
+	kickHitbox = Instance.new("Part")
+	kickHitbox.Size = Vector3.new(leaveRadius, leaveRadius, leaveRadius)
+	kickHitbox.Anchored = false
+	kickHitbox.CanCollide = false
+	kickHitbox.Transparency = 1
+	kickHitbox.Massless = true
+	kickHitbox.Parent = targetPlayer.Character
+
+	local weld = Instance.new("WeldConstraint")
+	weld.Part0 = kickHitbox
+	weld.Part1 = targetPlayer.Character:FindFirstChild("HumanoidRootPart")
+	weld.Parent = kickHitbox
+	
+	local function onHit(otherPart)
+		local charModel = otherPart:FindFirstAncestorOfClass("Model")
+		local checkPlayer = Players:GetPlayerFromCharacter(charModel)
+		if not checkPlayer and charModel then
+			local checkAdvance = charModel:FindFirstAncestorOfClass("Model")
+			checkPlayer = Players:GetPlayerFromCharacter(checkAdvance)
+			if not checkPlayer then
+				return
+			end
+		end
+		if checkPlayer and checkPlayer.Name ~= Players.LocalPlayer.Name and checkPlayer.Name ~= targetPlayer.Name then
+			Players.LocalPlayer:Kick(tostring(checkPlayer) .. " has reached the KICK hitbox")
+		end
+	end
+
+	kickHitbox.Touched:Connect(onHit())
+end
+
+LSRBox.FocusLost:Connect(function()
+	if not playerName or not targetPlayer then
+		StarterGui:SetCore("SendNotification", {
+			Title = "Potaxio Assistant",
+			Text = "A username must be set to detect players",
+			Icon = "http://www.roblox.com/asset/?id=7545971320",
+		})
+		return
+	end
+
+	leaveRadius = tonumber(LSRBox.Text)
+
+	createOrUpdateHitbox()
 end)
 
 --Teleport
@@ -1761,6 +2064,10 @@ for i, v in pairs(playerChars) do
 	end
 end
 
+SpawnButton.MouseButton1Click:Connect(function()
+	secretSpawn = not secretSpawn
+end)
+
 MuteButton.MouseButton1Click:Connect(function()
 	local sound1 = workspace.Sound1
 	local sound2 = workspace.Sound2
@@ -1838,12 +2145,10 @@ local function makeDraggable(UIElement, updateCallback)
 		local distanceMovedX = (input.Position.X - InitialX)
 		local distanceMovedY = (input.Position.Y - InitialY)
 		local Pos = UIInitialPos + UDim2.new(distanceMovedX / ViewPortSize.X, 0, distanceMovedY / ViewPortSize.Y, 0)
-		UIElement.Position = UDim2.new(
-			math.clamp(Pos.X.Scale, 0, 1 - UIElement.Size.X.Scale),
-			Pos.X.Offset,
-			math.clamp(Pos.Y.Scale, 0, 1 - UIElement.Size.Y.Scale),
-			Pos.Y.Offset
-		)
+		local newX = math.clamp(Pos.X.Scale, 0, 1 - math.min(UIElement.Size.X.Scale, 1))
+		local newY = math.clamp(Pos.Y.Scale, 0, 1 - math.min(UIElement.Size.Y.Scale, 1))
+
+		UIElement.Position = UDim2.new(newX, Pos.X.Offset, newY, Pos.Y.Offset)
 
 		if updateCallback then
 			updateCallback()
@@ -1881,13 +2186,18 @@ local function makeDraggable(UIElement, updateCallback)
 	end)
 end
 
+local function roundToTwoDecimals(number)
+	return math.floor(number * 100 + 0.5) / 100
+end
+
 local function updateScale()
 	local buff = 0.5
 	local dragged = Dragger.Position.X.Scale
 	local updatedScale = buff + (dragged * 1.5)
+	local roundedScale = roundToTwoDecimals(updatedScale)
 
-	script.Parent:FindFirstChild("ScaleLabel").Text = tostring(updatedScale) -- Assuming ScaleLabel is a sibling of the UI element
-	script.Parent:FindFirstChild("UIScale").Value = updatedScale -- Assuming UIScale is an instance storing the scale value
+	Settings:FindFirstChild("ScaleLabel").Text = string.format("%.2f", roundedScale) -- Assuming ScaleLabel is a sibling of the UI element
+	UIScale.Scale = roundedScale -- Assuming UIScale is an instance storing the scale value
 end
 
 makeDraggable(MainFrame)
@@ -1928,8 +2238,14 @@ UsernameBox.FocusLost:Connect(function()
 	end
 
 	if bestMatchPlayer then
-		UsernameBox.Text = tostring(bestMatchPlayer)
 		playerName = bestMatchPlayer
+		UsernameBox.Text = tostring(bestMatchPlayer)
+		for _, v in pairs(Players:GetPlayers()) do
+			if v.Name == tostring(playerName) then
+				targetPlayer = v
+				break
+			end
+		end
 	else
 		StarterGui:SetCore("SendNotification",{
 			Title = "Potaxio Assistant",
@@ -1970,8 +2286,41 @@ Players.PlayerAdded:Connect(function(player)
 end)
 
 player.CharacterAdded:Connect(function()
+	if secretSpawn then
+		Players.LocalPlayer.Character:MoveTo(0,999999,0)
+	end
+	
 	killOnHit()
-	Tusa.Visible = true
+	
+	if black == true then
+		Tusa.Visible = false
+		Players.LocalPlayer.PlayerGui.Menu.SelectionUI.Coins.Visible = false
+		Players.LocalPlayer.PlayerGui.Menu.SelectionUI.Deploy.ImageTransparency = 1
+		Players.LocalPlayer.PlayerGui.Menu.SelectionUI.Deploy.Label.TextTransparency = 1
+		for i, v in pairs(Players.LocalPlayer.PlayerGui.Menu.SelectionUI.Skins:GetChildren()) do
+			if v:IsA("ImageButton") then
+				if v:FindFirstChild("Lock") then
+					v.Lock.Visible = false
+					v.ViewportFrame.Visible = false
+				end
+				v.ImageTransparency = 1
+			end
+		end
+	elseif black == false then
+		Tusa.Visible = true
+		Players.LocalPlayer.PlayerGui.Menu.SelectionUI.Coins.Visible = true
+		Players.LocalPlayer.PlayerGui.Menu.SelectionUI.Deploy.ImageTransparency = 0
+		Players.LocalPlayer.PlayerGui.Menu.SelectionUI.Deploy.Label.TextTransparency = 0
+		for i, v in pairs(Players.LocalPlayer.PlayerGui.Menu.SelectionUI.Skins:GetChildren()) do
+			if v:IsA("ImageButton") then
+				if v:FindFirstChild("Lock") then
+					v.Lock.Visible = false
+					v.ViewportFrame.Visible = true
+				end
+				v.ImageTransparency = 0
+			end
+		end
+	end
 	
 	if not Tusa:FindFirstChild("TextLabel") then
 		local clone = Players.LocalPlayer.PlayerGui.Profile.KeysHolder.Q.TextLabel:Clone()
